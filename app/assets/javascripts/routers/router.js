@@ -5,7 +5,8 @@ PackOverflow.Routers.Router = Backbone.Router.extend({
   },
   
   routes: {
-    '': 'questionIndex'
+    '': 'questionIndex',
+    'questions/new': 'askQuestion'
   },
   
   questionIndex: function(){
@@ -18,6 +19,10 @@ PackOverflow.Routers.Router = Backbone.Router.extend({
     this._swapView(view);
   },
   
+  askQuestion: function(){
+    var view = new PackOverflow.Views.questionForm();
+    this._swapView(view);
+  },
   
   _swapView: function (view) {
     this.currentView && this.currentView.remove();
