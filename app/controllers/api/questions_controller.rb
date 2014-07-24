@@ -28,9 +28,8 @@ module Api
     def show
      #.includes(:comments, lists: :comments)
       @question = Question.find(params[:id])
-      console.log(@question)
       if @question
-        render :show
+        render json: @question
       else
         render json: ["Question not found"], status: 404
       end

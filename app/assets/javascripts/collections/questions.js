@@ -3,22 +3,22 @@ PackOverflow.Collections.Questions = Backbone.Collection.extend({
   url: 'api/questions',
   
   getOrFetch: function(id) {
-    var questions = this;
+    var question = this.get(id);
     
-    var question;
-
-    debugger;
-    if (question = this.get(id)) {
-      question.fetch();
-    } else {
+    if (!question) {
       question = new PackOverflow.Models.Question({ id: id });
       question.fetch({
-        success: function() { questions.add(question); }
+        success: function() { 
+          PackOverflow.Collections.questions.add(question);
+         }.bind(this)
       });
+    } else {
+      question.fetch();
     }
+    
     return question;
   }
   
 });
 
-PackOverflow.Collections.questions = new PackOverflow.Collections.Questions();
+PackOverflow.Collections.questions = new PackOverflow.Collections.Questions

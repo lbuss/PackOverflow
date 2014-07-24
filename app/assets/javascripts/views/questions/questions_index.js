@@ -4,7 +4,7 @@ PackOverflow.Views.QuestionsIndex = Backbone.View.extend({
   classname: 'questions-index',
   
   initialize: function(){
-    // this.listenTo(this.collection, "sync add", this.render);
+    this.listenTo(this.collection, "sync add", this.render);
   },
   
   
@@ -15,6 +15,14 @@ PackOverflow.Views.QuestionsIndex = Backbone.View.extend({
     });
     
     this.$el.html(content);
+    
+    this.collection.each( function(question){
+      var view = new PackOverflow.Views.QuestionShow({
+        model: question
+      })
+      $('.questionList').append($('<li>').html(view.render().$el))
+    })
+    
     return this;
   }
   

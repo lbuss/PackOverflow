@@ -13,7 +13,7 @@ PackOverflow.Routers.Router = Backbone.Router.extend({
   questionIndex: function() {
     PackOverflow.Collections.questions.fetch();
     var view = new PackOverflow.Views.QuestionsIndex({
-      collection: PackOverflow.Collections.boards
+      collection: PackOverflow.Collections.questions
     });
     
     this._swapView(view);
