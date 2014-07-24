@@ -10,12 +10,12 @@ PackOverflow.Views.QuestionForm = Backbone.View.extend({
     
     var params = $(event.currentTarget).serializeJSON();
     
-    var newBoard = new PackOverflow.Models.Question(params["question"]);
+    var newQuestion = new PackOverflow.Models.Question(params["question"]);
     var that = this;
-    newBoard.save({}, {
+    newQuestion.save({}, {
       success: function() {
-        // PackOverflow.Collections.questions.add(newBoard);
-        Backbone.history.navigate("/questions/"+newBoard.get("id"), {trigger:true});
+        PackOverflow.Collections.questions.add(newQuestion);
+        Backbone.history.navigate("/questions/"+newQuestion.get("id"), {trigger:true});
       }
     })
   },

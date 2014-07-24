@@ -27,7 +27,8 @@ PackOverflow.Routers.Router = Backbone.Router.extend({
   showQuestion: function(id) {
     var question = PackOverflow.Collections.questions.getOrFetch(id);
     var view = new PackOverflow.Views.QuestionShow({
-      model: question
+      model: question,
+      collection: question.answers()
     });
     this._swapView(view);
   },

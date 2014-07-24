@@ -1,0 +1,10 @@
+<form class="form">
+  <div class="form-group">
+    <input type="hidden" name="answer[question_id]" value="<%= question.get('id') %>">
+    <label for="body">body</label>
+    <textarea id="body" name="answer[body]" class="form-control" autofocus='true'></textarea>
+    <label for="tags">tags</label>
+    <input type="text" id="tags" name="answer[tags]" class="form-control" autofocus='true'>yet to be implemented</input>
+  </div>
+  <button class="btn btn-success">Post Your Answer</button>
+</form>

@@ -1,12 +1,12 @@
-PackOverflow.Views.QuestionShow = Backbone.View.extend({
+PackOverflow.Views.QuestionShow = Backbone.CompositeView.extend({
   template: JST['questions/show'],
   
   initialize: function() {
-    // this.collection = this.model.answers(); once answers are added
+    this.collection = this.model.answers();
     this.listenTo(this.model, "sync", this.render);
-    
-    // var ListNewView = new TrelloClone.Views.ListsNew();
-//     this.addSubview(".newList", ListNewView); subform for answering in future
+    this.listenTo(this.model.answers(), "sync add", this.render);
+    var answerForm = new PackOverflow.Views.AnswerForm({model: this.model});
+    this.addSubview(".form", answerForm);
   },
   
   render: function() {
@@ -15,7 +15,15 @@ PackOverflow.Views.QuestionShow = Backbone.View.extend({
     });
     this.$el.html(content);
     
+    this.model.answers().each( function(answer) {
+      Aview = new PackOverflow.Views.AnswerShow({
+        model: answer
+      });
+      $('.answerList').append($('<li>').html(Aview.render().$el));
+    })
     
+
+    this.attachSubviews();
     return this;
   }
 });
