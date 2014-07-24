@@ -28,7 +28,7 @@ module Api
     def show
      #.includes(:comments, lists: :comments)
       @question = Question.find(params[:id])
-
+      console.log(@question)
       if @question
         render :show
       else

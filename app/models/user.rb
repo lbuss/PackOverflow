@@ -14,9 +14,13 @@
 
 class User < ActiveRecord::Base
   validates :email, :session_token, presence: true
+  
+  has_many :questions
 
   attr_reader :password
   before_validation :ensure_session_token
+  
+  
 
   # def gravatar_url
  #    "http://www.gravatar.com/avatar/#{ Digest::MD5.hexdigest(email) }"

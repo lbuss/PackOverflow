@@ -1,11 +1,11 @@
 <form class="form">
   <div class="form-group">
-    <label for="title">
-    <input type="text" id="title" class="form-control" autofocus='true'></input>
-    <label for="body">
-    <textarea id="body" class="form-control" autofocus='true'></textarea>
-    <label for="tags">
-    <input type="text" id="tags" class="form-control" autofocus='true'>yet to be implemented</input>
+    <label for="title">title</label>
+    <input type="text" name="question[title]" id="title" class="form-control" autofocus='true'></input>
+    <label for="body">body</label>
+    <textarea id="body" name="question[body]" class="form-control" autofocus='true'></textarea>
+    <label for="tags">tags</label>
+    <input type="text" id="tags" name="question[tags]" class="form-control" autofocus='true'>yet to be implemented</input>
   </div>
   <button class="btn btn-success">Post Your Question</button>
 </form>
