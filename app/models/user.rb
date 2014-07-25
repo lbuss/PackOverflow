@@ -17,7 +17,8 @@ class User < ActiveRecord::Base
   
   has_many :questions
   has_many :answers
-
+  has_many :comments
+  
   attr_reader :password
   before_validation :ensure_session_token
   

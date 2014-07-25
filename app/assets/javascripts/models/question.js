@@ -6,6 +6,11 @@ PackOverflow.Models.Question = Backbone.Model.extend({
       this.answers().set(payload.answers, {parse: true});
       delete payload.answers;
     }
+    
+    if(payload.comments) {
+      this.comments().set(payload.comments, {parse: true});
+      delete payload.comments;
+    }
     return payload;
   },
 
@@ -16,6 +21,14 @@ PackOverflow.Models.Question = Backbone.Model.extend({
       });
     }
     return this._answers;
+  },
+  
+  comments: function() {
+    if (!this._comments) {
+      this._comments = new PackOverflow.Collections.Comments([], {
+        question: this
+      });
+    }
+    return this._comments;
   }
-
 })

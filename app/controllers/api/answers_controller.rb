@@ -31,7 +31,7 @@ module Api
      #.includes(:comments, lists: :comments)
       @answer = Answer.find(params[:id])
       if @answer
-        render json: @answer
+        render json: @answer, include: [:comments]
       else
         render json: ["Answer not found"], status: 404
       end

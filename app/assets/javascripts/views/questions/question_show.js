@@ -2,11 +2,15 @@ PackOverflow.Views.QuestionShow = Backbone.CompositeView.extend({
   template: JST['questions/show'],
   
   initialize: function() {
-    this.collection = this.model.answers();
     this.listenTo(this.model, "sync", this.render);
     this.listenTo(this.model.answers(), "sync add", this.render);
+    
     var answerForm = new PackOverflow.Views.AnswerForm({model: this.model});
-    this.addSubview(".form", answerForm);
+    this.addSubview(".frm", answerForm);
+    var CommentNewView = new PackOverflow.Views.CommentForm({type: 'Question', model: this.model});
+    this.addSubview(".cList", CommentNewView);
+    C  = CommentNewView;
+    Q = this;
   },
   
   render: function() {
@@ -15,7 +19,7 @@ PackOverflow.Views.QuestionShow = Backbone.CompositeView.extend({
     });
     this.$el.html(content);
     
-    this.model.answers().each( function(answer) {
+    this.collection.each( function(answer) {
       Aview = new PackOverflow.Views.AnswerShow({
         model: answer
       });

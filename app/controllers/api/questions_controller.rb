@@ -20,16 +20,16 @@ module Api
     end
 
     def index
-      #should return top questions
+      #should return top questions or whatever eventually
       @questions = Question.all
       render json: @questions
     end
 
     def show
      #.includes(:comments, lists: :comments)
-      @question = Question.find(params[:id])
+      @question = Question.includes(:comments, :answers => :comments).find(params[:id])
       if @question
-        render json: @question, include: [:answers]
+        render :show
       else
         render json: ["Question not found"], status: 404
       end
