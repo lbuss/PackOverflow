@@ -5,7 +5,8 @@ module Api
     
     def create
       @question = current_user.questions.new(question_params)
-
+     
+      debugger
       if @question.save
         render json: @question
       else

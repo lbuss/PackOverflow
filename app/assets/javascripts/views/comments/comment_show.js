@@ -1,4 +1,6 @@
 PackOverflow.Views.CommentShow = Backbone.View.extend({
+  tagName: 'li',
+  
   template: JST['comments/show'],
   
   initialize: function() {

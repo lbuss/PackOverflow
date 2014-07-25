@@ -11,8 +11,9 @@ PackOverflow.Views.CommentForm = Backbone.View.extend({
   
   submit: function(event){
     event.preventDefault();
-    debugger
-    var params = $(event.currentTarget).serializeJSON();
+    event.preventDefault();
+    var $form = $(event.currentTarget);
+    var params = $form.serializeJSON();
     params.comment.commentable_type = this.type;
     params.comment.commentable_id = this.model.id;
     
@@ -20,6 +21,7 @@ PackOverflow.Views.CommentForm = Backbone.View.extend({
     var that = this;
     newComment.save({}, {
       success: function() {
+        $form[0].reset();
         that.model.comments().add(newComment);
       }
     })

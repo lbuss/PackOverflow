@@ -3,9 +3,16 @@ PackOverflow.Views.AnswerShow = Backbone.CompositeView.extend({
   
   initialize: function() {
     this.listenTo(this.model, "sync", this.render);
+    this.listenTo(this.collection, "sync", this.render);
+    this.listenTo(this.collection, "add", this.update);
     
-    var CommentNewView = new PackOverflow.Views.CommentForm({type: 'Answer', model: this.model});
-    this.addSubview(".commentList", CommentNewView);
+    var answerCommentForm = new PackOverflow.Views.CommentForm({type: 'Answer', model: this.model});
+    this.addSubview(".commentForm", answerCommentForm);
+    
+    var that = this;
+    this.collection.each(function(comment) {
+      that.addCommentView(comment);
+    })
   },
   
   render: function() {
@@ -14,15 +21,18 @@ PackOverflow.Views.AnswerShow = Backbone.CompositeView.extend({
     });
     this.$el.html(content);
     
-    var that = this;
-    this.model.comments().each(function(comment) {
-      Cview = new PackOverflow.Views.CommentShow({
-        model: comment
-      });
-      that.$el.find('.commentList').append($('<li>').html(Cview.render().$el));
-    })
-    
     this.attachSubviews();
     return this;
+  },
+  
+  update: function(event) {
+    alert('updating!')
+    this.addCommentView(event);
+    this.render();
+  },
+  
+  addCommentView: function(comment){
+    var newComment = new PackOverflow.Views.CommentShow({ model: comment });
+    this.addSubview(".answerCommentList", newComment); 
   }
 });

@@ -3,14 +3,13 @@ PackOverflow.Views.QuestionShow = Backbone.CompositeView.extend({
   
   initialize: function() {
     this.listenTo(this.model, "sync", this.render);
-    this.listenTo(this.model.answers(), "sync add", this.render);
+    this.listenTo(this.collection, "sync", this.render);
+    this.listenTo(this.model.comments(), "sync", this.render);
     
     var answerForm = new PackOverflow.Views.AnswerForm({model: this.model});
-    this.addSubview(".frm", answerForm);
-    var CommentNewView = new PackOverflow.Views.CommentForm({type: 'Question', model: this.model});
-    this.addSubview(".cList", CommentNewView);
-    C  = CommentNewView;
-    Q = this;
+    this.addSubview("#answerForm", answerForm);
+    var commentForm = new PackOverflow.Views.CommentForm({type: 'Question', model: this.model});
+    this.addSubview("#questionCommentForm", commentForm);
   },
   
   render: function() {
@@ -19,12 +18,20 @@ PackOverflow.Views.QuestionShow = Backbone.CompositeView.extend({
     });
     this.$el.html(content);
     
+    this.model.comments().each( function(comment) {
+      var Cview = new PackOverflow.Views.CommentShow({
+        model: comment
+      });
+      $('#questionCommentList').append(Cview.render().$el);
+    });
+    
     this.collection.each( function(answer) {
-      Aview = new PackOverflow.Views.AnswerShow({
-        model: answer
+      var Aview = new PackOverflow.Views.AnswerShow({
+        model: answer,
+        collection: answer.comments()
       });
       $('.answerList').append($('<li>').html(Aview.render().$el));
-    })
+    });
     
 
     this.attachSubviews();
