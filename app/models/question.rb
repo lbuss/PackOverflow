@@ -14,9 +14,10 @@
 
 class Question < ActiveRecord::Base
   validates :title, :user, :body, presence: true
-  
+   
   has_many :comments, as: :commentable
   has_many :answers
+  has_many :votes, as: :votable
   has_many :tags
   
   belongs_to :user

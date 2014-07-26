@@ -1,13 +1,29 @@
-json.extract! @question, :id, :title, :body, :created_at, :updated_at
+json.extract! @question, :id, :title, :body, :sumVotes, :created_at, :updated_at
 
-json.comments @question.comments do |comment|
-  json.extract! comment, :id, :user_id, :body, :created_at, :updated_at
+# json.votes @question.votes do |vote|
+#   json.extract! vote, :user_id, :value
+# end
+
+json.comments @comments.select(){|c| c.commentable_id == @question.id && c.commentable_type == 'Question'} do |comment|
+  json.extract! comment, :id, :user_id, :body, :sumVotes, :created_at, :updated_at
+    
+  # json.votes comment.votes do |vote|
+#     json.extract! vote, :user_id, :value
+#   end
 end
 
-json.answers @question.answers do |answer|
-  json.extract! answer, :id, :body, :created_at, :updated_at
+json.answers @answers do |answer|
+  json.extract! answer, :id, :body, :sumVotes, :created_at, :updated_at
 
-  json.comments answer.comments do |comments|
-    json.extract! comments, :id, :body, :created_at, :updated_at
+  # json.votes answer.votes do |vote|
+#     json.extract! vote, :user_id, :value
+#   end
+  
+  json.comments @comments.select(){ |c| c.commentable_id == answer.id && c.commentable_type == 'Answer'} do |comment|
+    json.extract! comment, :id, :body, :created_at, :sumVotes, :updated_at
+    
+    # json.votes comment.votes do |vote|
+   #    json.extract! vote, :user_id, :value
+   #  end
   end
 end

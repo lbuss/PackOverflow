@@ -11,7 +11,7 @@ PackOverflow.Views.CommentForm = Backbone.View.extend({
   
   submit: function(event){
     event.preventDefault();
-    event.preventDefault();
+    
     var $form = $(event.currentTarget);
     var params = $form.serializeJSON();
     params.comment.commentable_type = this.type;

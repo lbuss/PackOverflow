@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140725163810) do
+ActiveRecord::Schema.define(version: 20140725210339) do
 
   create_table "answers", force: true do |t|
     t.text     "body",        null: false
@@ -20,6 +20,7 @@ ActiveRecord::Schema.define(version: 20140725163810) do
     t.integer  "user_id",     null: false
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "vote_count"
   end
 
   add_index "answers", ["question_id"], name: "index_answers_on_question_id"
@@ -33,6 +34,7 @@ ActiveRecord::Schema.define(version: 20140725163810) do
     t.integer  "user_id",          null: false
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "vote_count"
   end
 
   add_index "comments", ["commentable_id"], name: "index_comments_on_commentable_id"
@@ -47,6 +49,7 @@ ActiveRecord::Schema.define(version: 20140725163810) do
     t.integer  "user_id",    null: false
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "vote_count"
   end
 
   add_index "questions", ["title"], name: "index_questions_on_title"
@@ -75,5 +78,18 @@ ActiveRecord::Schema.define(version: 20140725163810) do
 
   add_index "users", ["email"], name: "index_users_on_email"
   add_index "users", ["session_token"], name: "index_users_on_session_token"
+
+  create_table "votes", force: true do |t|
+    t.integer  "value"
+    t.integer  "votable_id"
+    t.string   "votable_type"
+    t.integer  "user_id",      null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "votes", ["user_id"], name: "index_votes_on_user_id"
+  add_index "votes", ["votable_id"], name: "index_votes_on_votable_id"
+  add_index "votes", ["votable_type"], name: "index_votes_on_votable_type"
 
 end

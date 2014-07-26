@@ -6,6 +6,9 @@ PackOverflow.Views.AnswerShow = Backbone.CompositeView.extend({
     this.listenTo(this.collection, "sync", this.render);
     this.listenTo(this.collection, "add", this.update);
     
+    var answerVoteBox = new PackOverflow.Views.VoteShow({type:'Answer', model: this.model});
+    this.addSubview(".answerVoteBox", answerVoteBox);
+    
     var answerCommentForm = new PackOverflow.Views.CommentForm({type: 'Answer', model: this.model});
     this.addSubview(".commentForm", answerCommentForm);
     
@@ -26,7 +29,6 @@ PackOverflow.Views.AnswerShow = Backbone.CompositeView.extend({
   },
   
   update: function(event) {
-    alert('updating!')
     this.addCommentView(event);
     this.render();
   },
