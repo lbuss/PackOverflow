@@ -5,8 +5,6 @@ module Api
     
     def create
       @question = current_user.questions.new(question_params)
-     
-      debugger
       if @question.save
         render json: @question
       else
@@ -22,7 +20,7 @@ module Api
 
     def index
       #should return top questions or whatever eventually
-      @questions = Question.all
+      @questions = Question.select("questions.*, SUM(votes.value) AS sumVotes").joins(:votes).group("questions.id")
       render json: @questions
     end
 

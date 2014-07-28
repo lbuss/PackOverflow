@@ -1,5 +1,5 @@
 <form class="form">
- <button class="btn btn-success upvote">Upvote</button>
- <p><%= thing.get("sumVotes") %></p>
-<button class="btn btn-success downvote">Downvote</button>
+<button class="upvote glyphicon glyphicon-arrow-up"></button>
+<p><%= thing.get("sumVotes") || 0 %></p>
+<button class="downvote glyphicon glyphicon-arrow-down"></button>
 </form>

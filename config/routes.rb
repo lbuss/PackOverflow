@@ -9,5 +9,6 @@ Rails.application.routes.draw do
     resources :answers
     resources :comments
     resources :votes
+    resources :users
   end
 end

@@ -1,5 +1,6 @@
 PackOverflow.Views.QuestionForm = Backbone.View.extend({
   template: JST['questions/form'],
+  formTemplate: JST['wysiwyg/form'],
   
   events: {
     "submit form": "submit"
@@ -9,6 +10,7 @@ PackOverflow.Views.QuestionForm = Backbone.View.extend({
     event.preventDefault();
     
     var params = $(event.currentTarget).serializeJSON();
+    params['question']['body']=$('#editor').html();
     
     var newQuestion = new PackOverflow.Models.Question(params["question"]);
     var that = this;
@@ -22,7 +24,9 @@ PackOverflow.Views.QuestionForm = Backbone.View.extend({
   
   render: function () {
       var content = this.template();
+      var wmdForm = this.formTemplate();
       this.$el.html(content);
+      this.$el.find(".wmdInsert").html(wmdForm);
       return this;
   }
   

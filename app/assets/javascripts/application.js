@@ -13,6 +13,8 @@
 //= require jquery
 //= require jquery_ujs
 //= require jquery.serializeJSON
+//= require jquery.hotkeys
+//= require bootstrap-wysiwyg
 //= require underscore
 //= require backbone
 //= require bootstrap

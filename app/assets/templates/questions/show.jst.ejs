@@ -1,12 +1,15 @@
-<h4><%= question.escape('title') %></h4>
 
-<p><%= question.escape('body') %></p>
+<div class="page-header col-xs-12"><h4><%= question.escape('title') %></h4></div>
 
-<div id="questionVoteBox" class="voteBox"></div>
-
-<ul id="questionCommentList" class="commentList"></ul>
-
-<div id="questionCommentForm" class="form"></div>
+<div class="row">
+<div id="questionVoteBox" class="voteBox col-xs-1"></div>
+<div class="col-xs-11">
+  <div id="answerBody"><%= question.get('body') %></div>
+  <ul id="questionCommentList" class="commentList">
+  </ul>
+  <div id="questionCommentForm" class="form"></div>
+</div>
+</div>
 
 <ul class="answerList"></ul>
   

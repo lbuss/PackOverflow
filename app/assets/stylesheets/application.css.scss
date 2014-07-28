@@ -12,12 +12,84 @@
  *
  *= require_tree .
  *= require_self
+ *
  */
 
-
 @import "bootstrap";
+@import "navbar";
 
 // for fixed top navbar
 body {
   padding-top: 60px;
+  background-image: image-url('Yosemite.jpg');
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-color: #1A1A1A;
+  background-position: center;
+}
+
+#underHeader {
+  width: 980px;
+}
+
+#main {
+  width: 980px;
+  background:#7f7f7f;
+  background:rgba(255,255,255,0.7);
+}
+
+.navbar{
+  background-color: #1A1A1A;
+  border-color: #1A1A1A;
+  background-image:none;
+}
+//#formWrapper{
+//  display: block;
+//}
+
+//#railsForm {
+//  display: inline-block;
+//  position: relative;
+//  top: 50%;
+//  transform: translateY(50%);
+//  text-align: center;
+//  margin-left: auto;
+//  margin-right: auto;
+//  padding-top: 5px;
+//  padding-left: 20px;
+//  padding-right: 20px;
+//  padding-bottom: 20px;
+//  background:#7f7f7f;
+//  background:rgba(255,255,255,0.7);
+//}
+
+#editor {overflow:scroll; min-height:300px}
+
+a{
+  color: #1A1A1A;
+}
+
+a:hover, a:focus{
+  color: #FF9900;
+}
+
+
+
+.btn-primary:hover, .btn-primary:focus, .btn-primary:active, .btn-primary.active, .open .dropdown-toggle.btn-primary {
+  background-color: #FF9900;
+  border-color: #FF9900;
+ }
+
+.btn
+{
+  background-color: #A0A0A0;
+  border-color: #A0A0A0;
+}
+.voteBox{
+  display: inline-block;
+}
+  
+ul{
+  list-style-type: none;
+  list-style-position: outside;
 }

@@ -1,13 +1,15 @@
-<h2>Sign In</h2>
+<div id="railsForm">
+  <h2>Sign In</h2>
 
-<form action="/session" method="post">
-  <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
-    <label>Username<br>
-      <input name="user[username]" type="text"><br>
-    </label><br>
-    <label>Password<br>
-      <input name="user[password]" type="password"><br>
-    </label><br>
+  <form action="/session" method="post">
+    <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+      <label>Username<br>
+        <input name="user[username]" type="text"><br>
+      </label><br>
+      <label>Password<br>
+        <input name="user[password]" type="password"><br>
+      </label><br>
 
-  <input type="submit" value="Submit">
-</form>
+    <input type="submit" value="Submit">
+  </form>
+</div>

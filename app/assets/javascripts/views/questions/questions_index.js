@@ -16,6 +16,8 @@ PackOverflow.Views.QuestionsIndex = Backbone.View.extend({
     
     this.$el.html(content);
     
+    
+    
     this.collection.each( function(question){
       var view = new PackOverflow.Views.QuestionIndexShow({
         model: question
