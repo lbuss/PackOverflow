@@ -5,7 +5,7 @@
 <div class="col-xs-11">  
 <h4><a href="/#/questions/<%= question.get('id') %>" class="menuLink"><%= question.escape('title') %></a></h4>
 
-<p>asked by <a href="/#/users/<%= question.get('user_id') %>"><%= question.username %></a> at <%= question.get('created_at') %></p>
+<p>asked by <a href="/#/users/<%= question.get('user_id') %>"><%= question.escape('username') %></a> at <%= question.get('created_at') %></p>
 </div>
 
 <row>

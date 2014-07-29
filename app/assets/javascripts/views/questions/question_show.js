@@ -37,6 +37,8 @@ PackOverflow.Views.QuestionShow = Backbone.CompositeView.extend({
     
 
     this.attachSubviews();
+    $("#editor").wysiwyg();
+    $('.btn').tooltip();
     return this;
   }
 });

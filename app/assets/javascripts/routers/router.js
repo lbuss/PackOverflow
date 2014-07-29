@@ -33,8 +33,6 @@ PackOverflow.Routers.Router = Backbone.Router.extend({
       collection: question.answers()
     });
     this._swapView(view);
-    $("#editor").wysiwyg();
-    $('.btn').tooltip();
   },
   
   _swapView: function (view) {
