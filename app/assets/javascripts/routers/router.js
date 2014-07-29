@@ -12,9 +12,15 @@ PackOverflow.Routers.Router = Backbone.Router.extend({
   },
   
   questionIndex: function() {
-    PackOverflow.Collections.questions.fetch();
+    PackOverflow.Collections.topQuestions = new PackOverflow.Collections.Questions;
+    PackOverflow.Collections.newQuestions = new PackOverflow.Collections.Questions;
+    PackOverflow.Collections.unansweredQuestions = new PackOverflow.Collections.Questions;
+    this.loadQuestions();
+    
     var view = new PackOverflow.Views.QuestionsIndex({
-      collection: PackOverflow.Collections.questions
+      topCollection: PackOverflow.Collections.topQuestions,
+      newCollection: PackOverflow.Collections.newQuestions,
+      unansweredCollection: PackOverflow.Collections.unansweredQuestions
     });
     
     this._swapView(view);
@@ -46,6 +52,18 @@ PackOverflow.Routers.Router = Backbone.Router.extend({
       commentCollection: user.comments(),
     });
     this._swapView(view);
+  },
+  
+  loadQuestions: function() {
+    $.ajax({url:'/api/questions',
+    dataType: 'json',
+    success: function(data){
+      PackOverflow.Collections.topQuestions.set(data.topQuestions);
+      PackOverflow.Collections.newQuestions.set(data.newQuestions);
+      PackOverflow.Collections.unansweredQuestions.set(data.unansweredQuestions);
+      PackOverflow.Collections.topQuestions.trigger('sync');
+    }
+  })
   },
   
   _swapView: function (view) {

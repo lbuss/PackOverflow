@@ -18,7 +18,7 @@ json.answers @answers do |answer|
   # json.votes answer.votes do |vote|
 #     json.extract! vote, :user_id, :value
 #   end
-  
+ 
   json.comments @comments.select(){ |c| c.commentable_id == answer.id && c.commentable_type == 'Answer'} do |comment|
     json.extract! comment, :id, :body, :votes, :sumVotes, :username, :created_at, :updated_at
     

@@ -2,6 +2,7 @@ PackOverflow.Models.Question = Backbone.Model.extend({
   urlRoot: 'api/questions',
   
   parse: function(payload) {
+    
     if(payload.answers) {
       this.answers().set(payload.answers, {parse: true});
       delete payload.answers;

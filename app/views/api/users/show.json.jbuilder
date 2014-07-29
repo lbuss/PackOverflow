@@ -1,7 +1,7 @@
 json.extract! @user, :id, :username, :email, :created_at, :updated_at
 
 json.questions @questions do |question|
-  json.extract! question, :id, :user_id, :title, :body, :votes, :sumVotes, :created_at, :updated_at
+  json.extract! question, :id, :user_id, :title, :body, :votes, :username, :sumVotes, :created_at, :updated_at
 end
 
 json.answers @answers do |answer|
