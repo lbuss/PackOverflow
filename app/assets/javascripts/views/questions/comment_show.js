@@ -8,6 +8,7 @@ PackOverflow.Views.CommentShow = Backbone.View.extend({
   },
   
   render: function() {
+
     var content = this.template({
        comment : this.model
     });

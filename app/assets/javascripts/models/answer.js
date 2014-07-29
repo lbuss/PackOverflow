@@ -17,6 +17,11 @@ PackOverflow.Models.Answer = Backbone.Model.extend({
       delete payload.votes;
     }
     
+    if(payload.username){
+      this.username = payload.username;
+      delete payload.username;
+    }
+    
     return payload;
   },
   

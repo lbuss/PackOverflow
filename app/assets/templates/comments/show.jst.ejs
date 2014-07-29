@@ -1,2 +1,3 @@
 <hr>
 <p><%= comment.escape('body') %></p>
+<p><a href="/#/users/<%= comment.get('user_id') %>"><%= comment.username %></a> at <%= comment.get('created_at') %></p>
