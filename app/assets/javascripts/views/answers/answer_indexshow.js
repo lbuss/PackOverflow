@@ -1,6 +1,8 @@
-PackOverflow.Views.QuestionIndexShow = Backbone.View.extend({
-  template: JST['questions/indexshow'],
+PackOverflow.Views.AnswerIndexShow = Backbone.View.extend({
+  tagName: "li",
   
+  template: JST['answers/indexshow'],
+
   initialize: function(options) {
     this.username = options.username;
     this.listenTo(this.model, "sync", this.render);
@@ -8,7 +10,7 @@ PackOverflow.Views.QuestionIndexShow = Backbone.View.extend({
   
   render: function() {
     var content = this.template({
-      question: this.model,
+      answer: this.model,
       username: this.username
     });
     this.$el.html(content);

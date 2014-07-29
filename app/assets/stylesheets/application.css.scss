@@ -73,7 +73,9 @@ a:hover, a:focus{
   color: #FF9900;
 }
 
-
+li{
+  margin-left: 0;
+}
 
 .btn-primary:hover, .btn-primary:focus, .btn-primary:active, .btn-primary.active, .open .dropdown-toggle.btn-primary {
   background-color: #FF9900;
@@ -90,6 +92,7 @@ a:hover, a:focus{
 }
   
 ul{
+  margin-left: 0;
   list-style-type: none;
   list-style-position: outside;
 }

@@ -1,4 +1,4 @@
-PackOverflow.Views.UserShow = Backbone.View.extend({
+PackOverflow.Views.UserShow = Backbone.CompositeView.extend({
 
   template: JST['users/show'],
   
@@ -6,11 +6,9 @@ PackOverflow.Views.UserShow = Backbone.View.extend({
     this.model = options.model;
     this.questionCollection = options.questionCollection;
     this.answerCollection = options.answerCollection;
-    this.commentCollection = options.commentCollection;
     this.listenTo(this.model, "sync", this.render);
     this.listenTo(this.questionCollection, "sync", this.render);
     this.listenTo(this.answerCollection, "sync", this.render);
-    this.listenTo(this.commentCollection, "sync", this.render);
   },
   
   events: {
@@ -22,11 +20,28 @@ PackOverflow.Views.UserShow = Backbone.View.extend({
       user: this.model,
       questionCollection: this.questionCollection,
       answerCollection: this.answerCollection,
-      commentCollection: this.commentCollection
-    });
-  
-    this.$el.html(content);
 
+    });
+    this.$el.html(content);
+    
+    var that = this;
+    this.questionCollection.each( function(question){
+      var view = new PackOverflow.Views.QuestionIndexShow({
+        model: question,
+        username: that.model.get('username')
+      })
+      $('.questionList').append($('<li>').html(view.render().$el))
+    })
+    
+    this.answerCollection.each(function(answer) {
+      var newAnswer = new PackOverflow.Views.AnswerIndexShow({ 
+        model: answer,
+        username: that.model.get('username')
+       });
+      that.addSubview(".answerList", newAnswer);
+    })
+    
+    this.attachSubviews();
     return this;
   },
   

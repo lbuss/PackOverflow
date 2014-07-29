@@ -2,24 +2,14 @@ PackOverflow.Models.User = Backbone.Model.extend({
   urlRoot: 'api/users',
   
   parse: function(payload) {
-    if(payload.questions) {
-      this.answers().set(payload.answers, {parse: true});
-      delete payload.answers;
-    }
     
     if(payload.answers) {
       this.answers().set(payload.answers, {parse: true});
       delete payload.answers;
     }
-    
-    if(payload.comments) {
-      this.comments().set(payload.comments, {parse: true});
-      delete payload.comments;
-    }
-    
-    if(payload.votes) {
-      this.votes().set(payload.votes, {parse: true});
-      delete payload.votes;
+    if(payload.questions) {
+      this.questions().set(payload.questions, {parse: true});
+      delete payload.questions;
     }
     return payload;
   },
