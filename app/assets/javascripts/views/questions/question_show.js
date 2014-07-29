@@ -5,6 +5,7 @@ PackOverflow.Views.QuestionShow = Backbone.CompositeView.extend({
     this.listenTo(this.model, "sync", this.render);
     this.listenTo(this.collection, "sync", this.render);
     this.listenTo(this.model.comments(), "sync", this.render);
+    this.listenTo(this.model.votes(), "sync", this.render);
     
     var voteBox = new PackOverflow.Views.VoteShow({ type: 'Question', model: this.model });
     this.addSubview("#questionVoteBox", voteBox);

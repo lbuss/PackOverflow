@@ -19,7 +19,7 @@ module Api
     end
 
     def index
-      #should return top questions or whatever eventually
+      #should return top questions or whatever eventually, might be easier with SQL, maybe more efficient to sort the collections
       @questions = Question.select("questions.*, SUM(votes.value) AS sumVotes, users.username AS username")
             .joins("LEFT OUTER JOIN votes ON (votes.votable_id = questions.id AND votes.votable_type = 'Question')")
             .joins(:user)

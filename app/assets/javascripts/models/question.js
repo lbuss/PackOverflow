@@ -12,10 +12,10 @@ PackOverflow.Models.Question = Backbone.Model.extend({
       delete payload.comments;
     }
     
-    // if(payload.votes) {
-    //   this.votes().set(payload.votes, {parse: true});
-    //   delete payload.votes;
-    // }
+    if(payload.votes) {
+      this.votes().set(payload.votes, {parse: true});
+      delete payload.votes;
+    }
     //
     // if(payload.vote_count){
     //   this.voteCount();
@@ -49,14 +49,14 @@ PackOverflow.Models.Question = Backbone.Model.extend({
     return this._comments;
   },
   
-  // votes: function() {
-  //   if (!this._votes) {
-  //     this._votes = new PackOverflow.Collections.Votes([], {
-  //       question: this
-  //     });
-  //   }
-  //   return this._votes;
-  // },
+  votes: function() {
+    if (!this._votes) {
+      this._votes = new PackOverflow.Collections.Votes([], {
+        question: this
+      });
+    }
+    return this._votes;
+  },
   //
   // voteCount: function() {
   //   if (!this._voteCount) {

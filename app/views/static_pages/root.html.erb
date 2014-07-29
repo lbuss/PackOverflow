@@ -7,4 +7,7 @@
   </div>
   <div id="main" class="container"></div>
 </div>
-<script>$(PackOverflow.initialize);</script>
+<script>
+  $(PackOverflow.initialize);
+  window.currentUser = <%= current_user.to_json.html_safe %>;
+</script>

@@ -16,13 +16,22 @@ PackOverflow.Views.VoteShow = Backbone.View.extend({
   },
   
   render: function() {
-    if (false) {
-      var content = this.showTemplate({
+    var voted = false;
+    var value = 0;
+    this.model.votes().each( function(vote){
+      if(vote.get('user_id') === window.currentUser.id){
+        voted = true;
+        value = vote.get('value');
+      }
+    })
+    if (voted === false) {
+      var content = this.formTemplate({
         thing: this.model
       });
     } else {
-      var content = this.formTemplate({
-        thing: this.model
+      var content = this.showTemplate({
+        thing: this.model,
+        vote: value
       });
     }
     

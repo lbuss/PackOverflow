@@ -7,10 +7,10 @@ PackOverflow.Models.Comment = Backbone.Model.extend({
       delete payload.votes;
     }
     
-    if(payload.vote_count){
-      this.voteCount().set()(payload.vote_count, {parse: true});
-      delete payload.votes;
-    }
+    // if(payload.vote_count){
+ //      this.voteCount().set()(payload.vote_count, {parse: true});
+ //      delete payload.votes;
+ //    }
     
     if(payload.username){
       this.username = payload.username;

@@ -4,8 +4,10 @@ PackOverflow.Collections.Votes = Backbone.Collection.extend({
   initialize: function(models, options) {
     if (options.question){
       this.question = options.question;
-    } else {
+    } else if (options.answer){
       this.answer = options.answer;
+    } else if (options.comment){
+      this.comment = options.comment;
     }
   }
 
