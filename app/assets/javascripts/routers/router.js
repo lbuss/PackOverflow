@@ -7,7 +7,8 @@ PackOverflow.Routers.Router = Backbone.Router.extend({
   routes: {
     '': 'questionIndex',
     'questions/new': 'askQuestion',
-    'questions/:id': 'showQuestion'
+    'questions/:id': 'showQuestion',
+    'users/:id': 'showUser'
   },
   
   questionIndex: function() {
@@ -31,6 +32,18 @@ PackOverflow.Routers.Router = Backbone.Router.extend({
     var view = new PackOverflow.Views.QuestionShow({
       model: question,
       collection: question.answers()
+    });
+    this._swapView(view);
+  },
+  
+  showUser: function(id) {
+    var user = new PackOverflow.Models.User({id: id});
+    user.fetch();
+    var view = new PackOverflow.Views.UserShow({
+      model: user,
+      questionCollection: user.questions(),
+      answerCollection: user.answers(),
+      commentCollection: user.comments(),
     });
     this._swapView(view);
   },
