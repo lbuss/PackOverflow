@@ -15,28 +15,32 @@ PackOverflow.Views.VoteShow = Backbone.View.extend({
    "click .downvote": "downvote"
   },
   
-  render: function() {
-    var voted = false;
-    var value = 0;
-    this.model.votes().each( function(vote){
-      if(vote.get('user_id') === window.currentUser.id){
-        voted = true;
-        value = vote.get('value');
-      }
-    })
-    if (voted === false) {
-      var content = this.formTemplate({
-        thing: this.model
-      });
-    } else {
-      var content = this.showTemplate({
-        thing: this.model,
-        vote: value
-      });
-    }
+  render: function(tempOn) {
+
+    var content = this.formTemplate({
+      thing: this.model
+    });
     
     this.$el.html(content);
-
+    
+    var that = this;
+    
+    if (tempOn === 1){
+      that.$el.find('.upvote').addClass('on');
+    } else if(tempOn === -1){
+      that.$el.find('.downvote').addClass('on');
+    } else {
+      this.model.votes().each( function(vote){
+        if(vote.get('user_id') === window.currentUser.id){
+          var value = vote.get('value');
+          if (value === 1){
+            that.$el.find('.upvote').addClass('on');
+          } else {
+            that.$el.find('.downvote').addClass('on');
+          }
+        }
+      })
+    }
     return this;
   },
   
@@ -61,8 +65,8 @@ PackOverflow.Views.VoteShow = Backbone.View.extend({
     var that = this;
     newVote.save({}, {
       success: function() {
-        that.model.sumVotes += 1;
-        that.render();
+        that.model.sumVotes += value;
+        that.render(value);
       }
     })
   }

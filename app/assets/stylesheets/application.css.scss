@@ -77,6 +77,35 @@ li{
   margin-left: 0;
 }
 
+.vote {
+  margin-left: 6px;
+  display: block;
+  background: image-url('arrowSprite.png');
+  overflow: hidden;
+  width: 40px;
+  height: 25px;
+  cursor: pointer;
+  
+}
+.voteText{
+ text-align: center;
+ font-size: 24px; 
+}
+.vote.upvote {
+  background-position:0px -25px;
+}
+
+.vote.downvote {
+  background-position:43px 0px;
+}
+.vote.upvote.on {
+  background-position:0px 0px;
+}
+
+.vote.downvote.on{
+  background-position:43px -25px;
+}
+
 .btn-primary:hover, .btn-primary:focus, .btn-primary:active, .btn-primary.active, .open .dropdown-toggle.btn-primary {
   background-color: #FF9900;
   border-color: #FF9900;

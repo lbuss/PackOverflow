@@ -34,7 +34,7 @@ module Api
             .joins("LEFT OUTER JOIN votes ON (votes.votable_id = questions.id AND votes.votable_type = 'Question')")
             .joins(:user)
             .group("questions.id")
-            .order("created_at desc");
+            .order("title desc");
       render :index
     end
 
