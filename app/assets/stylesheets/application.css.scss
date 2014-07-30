@@ -21,11 +21,31 @@
 // for fixed top navbar
 body {
   padding-top: 60px;
-  background-image: image-url('Yosemite.jpg');
-  background-repeat: no-repeat;
-  background-attachment: fixed;
-  background-color: #1A1A1A;
-  background-position: center;
+  background-color: #C0C0C0;
+  //background-image: image-url('Yosemite.jpg');
+//  background-repeat: no-repeat;
+//  background-attachment: fixed;
+//  background-color: #1A1A1A;
+//  background-position: center;
+}
+
+.text{
+  background-color: #FFFFFF;
+  display: inline-block;
+  padding: 10px;
+  margin-right: 0px;
+  margin-right: 10px;
+}
+
+#logo{
+  //height: 60px;
+  //padding-right: 0px;
+  width: 80px;
+  content: image-url('backpack.png');
+}
+
+#staticTitle{
+  padding-left: 0px;
 }
 
 #underHeader {
@@ -129,4 +149,13 @@ ul{
 
 .commentText{
   max-width: 400px;
+}
+
+#editor{
+  background-color: #FFFFFF;
+  margin: 20px;
+}
+
+hr {
+  border-color: #BBB;
 }
