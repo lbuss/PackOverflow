@@ -94,10 +94,6 @@ a:hover, a:focus{
   color: #FF9900;
 }
 
-li{
-  margin-left: 0;
-}
-
 .vote {
   margin-left: 6px;
   display: block;
@@ -108,10 +104,23 @@ li{
   cursor: pointer;
   
 }
-.voteText{
+.voteNumbers{
  text-align: center;
  font-size: 24px; 
 }
+
+.voteText{
+  text-align: center;
+}
+
+.voteDisplay{
+  background-color: #FFFFFF;
+  padding-right: 0px;
+  padding-left: 0px;
+  margin-right: 5px;
+  margin-left: 5px;
+}
+
 .vote.upvote {
   background-position:0px -25px;
 }
@@ -142,9 +151,14 @@ li{
 }
   
 ul{
-  margin-left: 0;
+  padding-left: 0px;
+ // margin-left: 0;
   list-style-type: none;
   list-style-position: outside;
+}
+
+.answerList{
+  margin-left:15px;
 }
 
 .commentText{
@@ -158,4 +172,12 @@ ul{
 
 hr {
   border-color: #BBB;
+}
+
+.normalWeight{
+  font-weight: normal;
+}
+
+.noPad{
+  padding:0px;
 }

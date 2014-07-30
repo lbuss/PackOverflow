@@ -1,6 +1,6 @@
 
-<hr>
+
 <div class="text">
 <p><%= comment.escape('body') %></p>
 </div>
-<p><a href="/#/users/<%= comment.get('user_id') %>"><%= comment.username %></a> at <%= comment.get('created_at') %></p>
+<p>-<a href="/#/users/<%= comment.get('user_id') %>"><%= comment.username %></a> <%=timeSince(comment.get('created_at')) %> ago</p>

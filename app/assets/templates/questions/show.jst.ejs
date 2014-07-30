@@ -11,7 +11,7 @@
   </div>
   <div class="row">
     <div class="col-xs-12">
-      <p>asked by <a href="/#/users/<%= question.get('user_id') %>"><%= question.escape('username') %></a> at <%= question.escape('created_at') %></p>
+      <p>asked by <a href="/#/users/<%= question.get('user_id') %>"><%= question.escape('username') %></a> <%= timeSince(question.escape('created_at')) %> ago</p>
     </div>
   </div>
   <div class="row">
@@ -20,9 +20,10 @@
       <div id="questionCommentForm" class="form"></div>
     </div>
   </div>
- <hr>
+  <hr>
 </div>
 
+
 <ul class="answerList"></ul>
-  
+
 <div id="answerForm" class="form"></div>
