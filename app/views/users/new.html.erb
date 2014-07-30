@@ -1,19 +1,16 @@
+<form id="railsForm" action="/users" method="post">
+  <h2>Sign Up</h2>
+  <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
 
-<div id="formWrapper">
-  <form id="railsForm" action="/users" method="post">
-    <h2>Sign Up</h2>
-    <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
-  
-      <label>Username<br>
-        <input name="user[username]" type="text"><br>
-      </label><br>
-      <label>Email<br>
-        <input name="user[email]" type="text"><br>
-      </label><br>
-      <label>Password<br>
-        <input name="user[password]" type="password"><br>
-      </label><br>
+    <label>Username<br>
+      <input name="user[username]" type="text"><br>
+    </label><br>
+    <label>Email<br>
+      <input name="user[email]" type="text"><br>
+    </label><br>
+    <label>Password<br>
+      <input name="user[password]" type="password"><br>
+    </label><br>
 
-    <input type="submit" value="Submit">
-  </form>
-</div>
+  <input class="btn btn-primary" type="submit" value="Submit">
+</form>
