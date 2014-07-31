@@ -20,41 +20,41 @@ module Api
 
     def index
       #should return top questions or whatever eventually, might be easier with SQL, maybe more efficient to sort the collections
-      @topQuestions = Question.select("questions.*, SUM(votes.value) AS sumVotes, users.username AS username, COUNT(DISTINCT answers.id) AS numAnswers")
+      @topQuestions = Question.select("questions.*, SUM(votes.value) AS sum_votes, COUNT(DISTINCT answers.id) AS num_answers")
             .joins("LEFT OUTER JOIN votes ON (votes.votable_id = questions.id AND votes.votable_type = 'Question')")
-            .joins(:user)
+            .includes(:user)
             .joins("LEFT OUTER JOIN answers ON (question_id = questions.id)")
             .group("questions.id")
-            .order("sumVotes desc");
-      @newQuestions = Question.select("questions.*, SUM(votes.value) AS sumVotes, users.username AS username, COUNT(DISTINCT answers.id) AS numAnswers")
+            .order("sum_votes desc");
+      @newQuestions = Question.select("questions.*, SUM(votes.value) AS sum_votes, COUNT(DISTINCT answers.id) AS num_answers")
             .joins("LEFT OUTER JOIN votes ON (votes.votable_id = questions.id AND votes.votable_type = 'Question')")
             .joins("LEFT OUTER JOIN answers ON (question_id = questions.id)")
-            .joins(:user)
+            .includes(:user)
             .group("questions.id")
             .order("created_at desc");
-      @unansweredQuestions = Question.select("questions.*, SUM(votes.value) AS sumVotes, users.username AS username, COUNT(DISTINCT answers.id) AS numAnswers")
+      @unansweredQuestions = Question.select("questions.*, SUM(votes.value) AS sum_votes, COUNT(DISTINCT answers.id) AS num_answers")
             .joins("LEFT OUTER JOIN votes ON (votes.votable_id = questions.id AND votes.votable_type = 'Question')")
-            .joins(:user)
+            .includes(:user)
             .joins("LEFT OUTER JOIN answers ON (question_id = questions.id)")
             .group("questions.id")
-            .order("numAnswers asc");
+            .order("num_answers asc");
       render :index
     end
 
     def show
-      # @question = Question.select("questions.*, SUM(votes.value) AS sumVotes")
+      # @question = Question.select("questions.*, SUM(votes.value) AS sum_votes")
   #           .joins(:votes).group("questions.id").find(params[:id]);
-      @question = Question.select("questions.*, SUM(votes.value) AS sumVotes, users.username AS username")
+      @question = Question.select("questions.*, SUM(votes.value) AS sum_votes")
             .joins("LEFT OUTER JOIN votes ON (votes.votable_id = questions.id AND votes.votable_type = 'Question')")
-            .joins(:user)
+            .includes(:user)
             .group("questions.id").find(params[:id]);
-      @answers = Answer.select("answers.*, SUM(votes.value) AS sumVotes, users.username AS username")
+      @answers = Answer.select("answers.*, SUM(votes.value) AS sum_votes")
             .joins("LEFT OUTER JOIN votes ON (votes.votable_id = answers.id AND votes.votable_type = 'Answer')")
-            .joins(:user)
+            .includes(:user)
             .group("answers.id").where(question_id: params[:id]);
-      @comments = Comment.select("comments.*, SUM(votes.value) AS sumVotes, users.username AS username")
+      @comments = Comment.select("comments.*, SUM(votes.value) AS sum_votes")
             .joins("LEFT OUTER JOIN votes ON (votes.votable_id = comments.id AND votes.votable_type = 'Comment')")
-            .joins(:user)
+            .includes(:user)
             .group("comments.id").where( "(commentable_id = ? AND commentable_type = 'Question') OR (commentable_id IN (?) AND commentable_type = 'Answer')", 
             @question.id, @answers.map(&:id));
             

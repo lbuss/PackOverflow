@@ -13,6 +13,9 @@
 
 ActiveRecord::Schema.define(version: 20140725210339) do
 
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "answers", force: true do |t|
     t.text     "body",        null: false
     t.integer  "votes"
@@ -23,8 +26,8 @@ ActiveRecord::Schema.define(version: 20140725210339) do
     t.integer  "vote_count"
   end
 
-  add_index "answers", ["question_id"], name: "index_answers_on_question_id"
-  add_index "answers", ["user_id"], name: "index_answers_on_user_id"
+  add_index "answers", ["question_id"], name: "index_answers_on_question_id", using: :btree
+  add_index "answers", ["user_id"], name: "index_answers_on_user_id", using: :btree
 
   create_table "comments", force: true do |t|
     t.text     "body",             null: false
@@ -37,9 +40,9 @@ ActiveRecord::Schema.define(version: 20140725210339) do
     t.integer  "vote_count"
   end
 
-  add_index "comments", ["commentable_id"], name: "index_comments_on_commentable_id"
-  add_index "comments", ["commentable_type"], name: "index_comments_on_commentable_type"
-  add_index "comments", ["user_id"], name: "index_comments_on_user_id"
+  add_index "comments", ["commentable_id"], name: "index_comments_on_commentable_id", using: :btree
+  add_index "comments", ["commentable_type"], name: "index_comments_on_commentable_type", using: :btree
+  add_index "comments", ["user_id"], name: "index_comments_on_user_id", using: :btree
 
   create_table "questions", force: true do |t|
     t.string   "title",      null: false
@@ -52,8 +55,8 @@ ActiveRecord::Schema.define(version: 20140725210339) do
     t.integer  "vote_count"
   end
 
-  add_index "questions", ["title"], name: "index_questions_on_title"
-  add_index "questions", ["user_id"], name: "index_questions_on_user_id"
+  add_index "questions", ["title"], name: "index_questions_on_title", using: :btree
+  add_index "questions", ["user_id"], name: "index_questions_on_user_id", using: :btree
 
   create_table "tags", force: true do |t|
     t.integer  "user_id",    null: false
@@ -63,8 +66,8 @@ ActiveRecord::Schema.define(version: 20140725210339) do
     t.datetime "updated_at"
   end
 
-  add_index "tags", ["answer_id"], name: "index_tags_on_answer_id"
-  add_index "tags", ["body"], name: "index_tags_on_body"
+  add_index "tags", ["answer_id"], name: "index_tags_on_answer_id", using: :btree
+  add_index "tags", ["body"], name: "index_tags_on_body", using: :btree
 
   create_table "users", force: true do |t|
     t.string   "username",        null: false
@@ -76,8 +79,8 @@ ActiveRecord::Schema.define(version: 20140725210339) do
     t.datetime "updated_at"
   end
 
-  add_index "users", ["email"], name: "index_users_on_email"
-  add_index "users", ["session_token"], name: "index_users_on_session_token"
+  add_index "users", ["email"], name: "index_users_on_email", using: :btree
+  add_index "users", ["session_token"], name: "index_users_on_session_token", using: :btree
 
   create_table "votes", force: true do |t|
     t.integer  "value"
@@ -88,8 +91,8 @@ ActiveRecord::Schema.define(version: 20140725210339) do
     t.datetime "updated_at"
   end
 
-  add_index "votes", ["user_id"], name: "index_votes_on_user_id"
-  add_index "votes", ["votable_id"], name: "index_votes_on_votable_id"
-  add_index "votes", ["votable_type"], name: "index_votes_on_votable_type"
+  add_index "votes", ["user_id"], name: "index_votes_on_user_id", using: :btree
+  add_index "votes", ["votable_id"], name: "index_votes_on_votable_id", using: :btree
+  add_index "votes", ["votable_type"], name: "index_votes_on_votable_type", using: :btree
 
 end
