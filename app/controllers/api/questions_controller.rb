@@ -23,19 +23,19 @@ module Api
       @topQuestions = Question.select("questions.*, SUM(votes.value) AS sumVotes, users.username AS username, COUNT(DISTINCT answers.id) AS numAnswers")
             .joins("LEFT OUTER JOIN votes ON (votes.votable_id = questions.id AND votes.votable_type = 'Question')")
             .joins(:user)
-            .joins(:answers)
+            .joins("LEFT OUTER JOIN answers ON (question_id = questions.id)")
             .group("questions.id")
             .order("sumVotes desc");
       @newQuestions = Question.select("questions.*, SUM(votes.value) AS sumVotes, users.username AS username, COUNT(DISTINCT answers.id) AS numAnswers")
             .joins("LEFT OUTER JOIN votes ON (votes.votable_id = questions.id AND votes.votable_type = 'Question')")
+            .joins("LEFT OUTER JOIN answers ON (question_id = questions.id)")
             .joins(:user)
-            .joins(:answers)
             .group("questions.id")
             .order("created_at desc");
       @unansweredQuestions = Question.select("questions.*, SUM(votes.value) AS sumVotes, users.username AS username, COUNT(DISTINCT answers.id) AS numAnswers")
             .joins("LEFT OUTER JOIN votes ON (votes.votable_id = questions.id AND votes.votable_type = 'Question')")
             .joins(:user)
-            .joins(:answers)
+            .joins("LEFT OUTER JOIN answers ON (question_id = questions.id)")
             .group("questions.id")
             .order("numAnswers asc");
       render :index
