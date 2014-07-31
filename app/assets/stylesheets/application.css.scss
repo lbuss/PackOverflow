@@ -18,10 +18,13 @@
 @import "bootstrap";
 @import "navbar";
 
+
+
 // for fixed top navbar
 body {
   padding-top: 60px;
   background-color: #C0C0C0;
+  
   //background-image: image-url('Yosemite.jpg');
 //  background-repeat: no-repeat;
 //  background-attachment: fixed;
@@ -161,6 +164,11 @@ ul{
   margin-left:15px;
 }
 
+#answerForm{
+  margin: 20px;
+}
+
+
 .commentText{
   max-width: 400px;
 }
@@ -172,6 +180,10 @@ ul{
 
 hr {
   border-color: #BBB;
+}
+
+.formButton{
+  margin-bottom: 10px;
 }
 
 .normalWeight{
