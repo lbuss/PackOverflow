@@ -27,10 +27,10 @@ PackOverflow.Views.VoteShow = Backbone.View.extend({
     
     if (tempOn === 1){
       that.$el.find('.upvote').addClass('on');
-      that.$el.find('.voteText').html(parseInt(this.$el.find('.voteText').html())+1)
+      that.$el.find('.voteNumbers').html(parseInt(this.$el.find('.voteNumbers').html())+1)
     } else if(tempOn === -1){
       that.$el.find('.downvote').addClass('on');
-      that.$el.find('.voteText').html(parseInt(this.$el.find('.voteText').html())-1)
+      that.$el.find('.voteNumbers').html(parseInt(this.$el.find('.voteNumbers').html())-1)
     } else {
       this.model.votes().each( function(vote){
         if(vote.get('user_id') === window.currentUser.id){
