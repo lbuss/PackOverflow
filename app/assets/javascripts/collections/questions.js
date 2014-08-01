@@ -2,6 +2,12 @@ PackOverflow.Collections.Questions = Backbone.Collection.extend({
   model: PackOverflow.Models.Question,
   url: 'api/questions',
   
+  initialize: function(models, options) {
+    if (options){
+      this.user = options.user;
+    }
+  },
+  
   getOrFetch: function(id) {
     var question = this.get(id);
     

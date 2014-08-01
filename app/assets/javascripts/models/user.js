@@ -2,34 +2,55 @@ PackOverflow.Models.User = Backbone.Model.extend({
   urlRoot: 'api/users',
   
   parse: function(payload) {
-    
     if(payload.answers) {
-      this.answers().set(payload.answers, {parse: true});
-      delete payload.answers;
+      this.topAnswers().set(payload.answers.topAnswers, {parse: true});
+      delete payload.answers.topAnswers;
+      this.newAnswers().set(payload.answers.newAnswers, {parse: true});
+      delete payload.answers.newAnswers;
     }
     if(payload.questions) {
-      this.questions().set(payload.questions, {parse: true});
-      delete payload.questions;
+      this.topQuestions().set(payload.questions.topQuestions, {parse: true});
+      delete payload.questions.topQuestions;
+      this.newQuestions().set(payload.questions.newQuestions, {parse: true});
+      delete payload.questions.newQuestions;
     }
     return payload;
   },
   
-  questions: function() {
-    if (!this._questions) {
-      this._questions = new PackOverflow.Collections.Questions([], {
-        question: this
+  topQuestions: function() {
+    if (!this._topQuestions) {
+      this._topQuestions = new PackOverflow.Collections.Questions([], {
+        user: this
       });
     }
-    return this._questions;
+    return this._topQuestions;
   },
   
-  answers: function() {
-    if (!this._answers) {
-      this._answers = new PackOverflow.Collections.Answers([], {
-        question: this
+  newQuestions: function() {
+    if (!this._newQuestions) {
+      this._newQuestions = new PackOverflow.Collections.Questions([], {
+        user: this
       });
     }
-    return this._answers;
+    return this._newQuestions;
+  },
+  
+  topAnswers: function() {
+    if (!this._topAnswers) {
+      this._topAnswers = new PackOverflow.Collections.Answers([], {
+        user: this
+      });
+    }
+    return this._topAnswers;
+  },
+  
+  newAnswers: function() {
+    if (!this._newAnswers) {
+      this._newAnswers = new PackOverflow.Collections.Answers([], {
+        user: this
+      });
+    }
+    return this._newAnswers;
   },
   
   comments: function() {

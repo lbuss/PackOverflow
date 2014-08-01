@@ -1,6 +1,6 @@
 json.extract! @question, :id, :title, :body, :votes ,:sum_votes, :user_id, :created_at, :updated_at
 
-
+json.username @question.user.username
 # json.votes @question.votes do |vote|
 #   json.extract! vote, :user_id, :value
 # end

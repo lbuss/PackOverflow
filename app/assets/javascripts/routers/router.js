@@ -49,9 +49,10 @@ PackOverflow.Routers.Router = Backbone.Router.extend({
     user.fetch();
     var view = new PackOverflow.Views.UserShow({
       model: user,
-      questionCollection: user.questions(),
-      answerCollection: user.answers(),
-      commentCollection: user.comments(),
+      topQuestionCollection: user.topQuestions(),
+      newQuestionCollection: user.newQuestions(),
+      topAnswerCollection: user.topAnswers(),
+      newAnswerCollection: user.newAnswers(),
     });
     this._swapView(view);
   },
