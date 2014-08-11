@@ -43,7 +43,11 @@ Rails.application.configure do
   # config.force_ssl = true
 
   # Set to :debug to see everything in the log.
+<<<<<<< HEAD
   config.log_level = :debug
+=======
+  config.log_level = :info
+>>>>>>> 2170d5edb43cc6a9c34349435a238f3eaf6038aa
 
   # Prepend all log lines with the following tags.
   # config.log_tags = [ :subdomain, :uuid ]
