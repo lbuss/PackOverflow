@@ -92,10 +92,7 @@ GEM
     mime-types (1.25.1)
     minitest (5.4.0)
     multi_json (1.10.1)
-<<<<<<< HEAD
     newrelic_rpm (3.9.1.236)
-=======
->>>>>>> 2170d5edb43cc6a9c34349435a238f3eaf6038aa
     pg (0.17.1)
     polyglot (0.3.5)
     rack (1.5.2)
@@ -168,10 +165,7 @@ DEPENDENCIES
   debugger
   jbuilder (~> 2.0)
   jquery-rails
-<<<<<<< HEAD
   newrelic_rpm
-=======
->>>>>>> 2170d5edb43cc6a9c34349435a238f3eaf6038aa
   pg
   rails (= 4.1.1)
   sass-rails (~> 4.0.3)
