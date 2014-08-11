@@ -1,5 +1,9 @@
 class UsersController < ApplicationController
-  def new; end
+  def new
+    if current_user
+      redirect_to static_pages
+    end
+  end
 
    def create
      @user = User.new(user_params)
