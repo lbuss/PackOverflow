@@ -15,7 +15,7 @@ PackOverflow.Views.VoteShow = Backbone.View.extend({
    "click .downvote": "downvote"
   },
   
-  render: function(tempOn) {
+  render: function() {
 
     var content = this.formTemplate({
       thing: this.model
@@ -24,29 +24,24 @@ PackOverflow.Views.VoteShow = Backbone.View.extend({
     this.$el.html(content);
     
     var that = this;
-    
-    if (tempOn > 0){
+    var prevVoteVal = 0;
+
+    this.model.votes().each( function(vote){
+      if(vote.get('user_id') === window.currentUser.id){
+        prevVoteVal = vote.get('value');
+        return false;
+      }
+    })
+
+    if (prevVoteVal === 1){
       that.$el.find('.upvote').addClass('on');
       that.$el.find('.downvote').removeClass('on');
-      that.$el.find('.voteNumbers').html(parseInt(this.$el.find('.voteNumbers').html())+1);
-    } else if(tempOn < 0){
+    } else if(prevVoteVal === -1) {
       that.$el.find('.downvote').addClass('on');
-      that.$el.find('.voteNumbers').html(parseInt(this.$el.find('.voteNumbers').html())-1);
       that.$el.find('.upvote').removeClass('on');
     } else {
-      this.model.votes().each( function(vote){
-        if(vote.get('user_id') === window.currentUser.id){
-          var value = vote.get('value');
-          if (value === 1){
-            that.$el.find('.upvote').addClass('on');
-            that.$el.find('.downvote').removeClass('on');
-          } else if(value === -1) {
-            that.$el.find('.downvote').addClass('on');
-            that.$el.find('.upvote').removeClass('on');
-          }
-          return false;
-        }
-      })
+      that.$el.find('.downvote').removeClass('on');
+      that.$el.find('.upvote').removeClass('on');
     }
     return this;
   },
@@ -63,18 +58,23 @@ PackOverflow.Views.VoteShow = Backbone.View.extend({
     event.preventDefault();
 
     var newVote;
+    var that = this;
+
 
     this.model.votes().each( function(vote){
       if(vote.get('user_id') === window.currentUser.id){
-        if (vote.get('value') != value){
+        var votes = that.model.attributes.sum_votes;
+
+        if (vote.get('value') === value){
+          that.model.attributes.sum_votes = votes - value;
+          vote.attributes.value = 0;
           newVote = vote;
-          newVote.attributes.value = value;
-          value = value * 2;
         } else {
+          that.model.attributes.sum_votes = votes + value - vote.get('value');
+          vote.attributes.value = value;
           newVote = vote;
-          newVote.attributes.value = 0;
-          value = 0;
         }
+        
         return false;
       }
     });
@@ -87,12 +87,13 @@ PackOverflow.Views.VoteShow = Backbone.View.extend({
           value: value
         }
       });
+      voteChangeVal = value;
     }
 
     var that = this;
     newVote.save({}, {
       success: function() {
-        that.render(value);
+        that.render();
       }
     })
   }
