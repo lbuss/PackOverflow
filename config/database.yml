@@ -9,11 +9,12 @@ default: &default
   pool: 5
   timeout: 5000
   hostname: localhost
-  username: appacademy
+  username: Johanna
 
 development:
   <<: *default
   database: pack_overflow_dev
+
 
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".

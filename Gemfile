@@ -41,7 +41,7 @@ gem 'newrelic_rpm'
 
 
 # Use debugger
-gem 'debugger', group: [:development, :test]
+gem 'byebug', group: [:development, :test]
 
 group :development do
   gem 'binding_of_caller'

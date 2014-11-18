@@ -12,6 +12,15 @@ module Api
       end
     end
 
+    def update
+      @vote = current_user.votes.find(params[:id])
+      if @vote.update_attributes(vote_params)
+        render json: @vote
+      else
+        render json: @vote.errors.full_messages, status: :unprocessable_entity
+      end      
+    end
+
     def destroy
       @vote = current_user.votes.find(params[:id])
       @vote.try(:destroy)
