@@ -7,7 +7,8 @@ PackOverflow.Views.VoteShow = Backbone.View.extend({
   initialize: function(options) {
     this.type = options.type;
     this.model = options.model;
-    this.listenTo(this.model, "sync", this.render);
+    var that = this;
+    this.listenTo(this.model, "sync", that.render);
   },
   
   events: {
@@ -24,19 +25,21 @@ PackOverflow.Views.VoteShow = Backbone.View.extend({
     this.$el.html(content);
     
     var that = this;
-    var prevVoteVal = 0;
+    var voteVal = 0;
 
     this.model.votes().each( function(vote){
       if(vote.get('user_id') === window.currentUser.id){
-        prevVoteVal = vote.get('value');
+        voteVal = vote.get('value');
         return false;
       }
     })
 
-    if (prevVoteVal === 1){
+    that.$el.find('.voteNumbers').html(parseInt(this.$el.find('.voteNumbers').html()));
+
+    if (voteVal === 1){
       that.$el.find('.upvote').addClass('on');
       that.$el.find('.downvote').removeClass('on');
-    } else if(prevVoteVal === -1) {
+    } else if(voteVal === -1) {
       that.$el.find('.downvote').addClass('on');
       that.$el.find('.upvote').removeClass('on');
     } else {
@@ -57,13 +60,14 @@ PackOverflow.Views.VoteShow = Backbone.View.extend({
   vote: function(value){
     event.preventDefault();
 
+    var votes = this.model.attributes.sum_votes;
     var newVote;
     var that = this;
+    var tempVote = 0;
 
 
     this.model.votes().each( function(vote){
       if(vote.get('user_id') === window.currentUser.id){
-        var votes = that.model.attributes.sum_votes;
 
         if (vote.get('value') === value){
           that.model.attributes.sum_votes = votes - value;
@@ -80,21 +84,24 @@ PackOverflow.Views.VoteShow = Backbone.View.extend({
     });
 
     if( !newVote ){
+      that.model.attributes.sum_votes = votes + value;
+      tempVote = value;
       newVote = new PackOverflow.Models.Vote({
-        vote:{
           votable_type: this.type,
           votable_id: this.model.id,
-          value: value
-        }
+          value: value,
+          user_id: window.currentUser.id
       });
-      voteChangeVal = value;
+      this.model.votes().push(newVote);
     }
 
-    var that = this;
     newVote.save({}, {
-      success: function() {
+      success: function(resp) {
+        if(!newVote.attributes.id){
+          that.model.votes().models[that.model.votes().models.length -1] = resp;
+        }
         that.render();
-      }
+      },
     })
   }
 });

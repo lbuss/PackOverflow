@@ -20,7 +20,7 @@ module Api
 
     def index
       #should return top questions or whatever eventually, might be easier with SQL, maybe more efficient to sort the collections
-      @topQuestions = Question.select("questions.*, COALESCE(SUM(votes.value), 0) AS sum_votes, COUNT(DISTINCT answers.id) AS num_answers")
+      @topQuestions = Question.select("questions.*, SUM(votes.value) AS sum_votes, COUNT(DISTINCT answers.id) AS num_answers")
             .joins("LEFT OUTER JOIN votes ON (votes.votable_id = questions.id AND votes.votable_type = 'Question')")
             .includes(:user)
             .joins("LEFT OUTER JOIN answers ON (question_id = questions.id)")
