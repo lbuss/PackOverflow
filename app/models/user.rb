@@ -54,7 +54,7 @@ class User < ActiveRecord::Base
 
   def self.new_guest
     new { |u| u.guest = true
-      u.username = "Guest #{Random.rand(90000)}"
+      u.username = "Guest #{Random.rand(99999)}"
       u.password = "password" }
   end
 

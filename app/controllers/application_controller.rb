@@ -26,9 +26,14 @@ class ApplicationController < ActionController::Base
 
   def create_guest_if_needed
 
+    puts "creat guest if needed"
+    
     return if signed_in? # already logged in, don't need to create another one
 
     user = User.new_guest
+
+    puts user.username
+
     if user.save
       sign_in!(user)
     end
