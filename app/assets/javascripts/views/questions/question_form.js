@@ -16,6 +16,7 @@ PackOverflow.Views.QuestionForm = Backbone.View.extend({
     var that = this;
     newQuestion.save({}, {
       success: function() {
+        newQuestion.username = window.currentUser.username || "Guest";
         PackOverflow.Collections.questions.add(newQuestion);
         Backbone.history.navigate("/questions/"+newQuestion.get("id"), {trigger:true});
       }

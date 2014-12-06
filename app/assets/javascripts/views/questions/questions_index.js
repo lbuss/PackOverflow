@@ -36,6 +36,10 @@ PackOverflow.Views.QuestionsIndex = Backbone.View.extend({
       })
       $('.questionList').append($('<li>').html(view.render().$el))
     })
+
+    $(".closeButton").click(function(){
+      $(this).parent().remove();
+    });
     
     return this;
   },

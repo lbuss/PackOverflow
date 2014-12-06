@@ -17,6 +17,7 @@ PackOverflow.Views.AnswerForm = Backbone.CompositeView.extend({
     newAnswer.save({}, {
       success: function() {
         $form[0].reset();
+        newAnswer.username = window.currentUser.username || "Guest";
         that.model.answers().add(newAnswer);
         Backbone.history.navigate("/questions/"+newAnswer.get("question_id"), {trigger:true});
       }

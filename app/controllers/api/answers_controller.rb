@@ -6,7 +6,10 @@ module Api
     def create
       question = Question.find_by_id(params[:question_id]);
       @answer = question.answers.new(answer_params)
-      @answer.user_id = current_user.id
+   
+      unless current_user.guest
+        @answer.user_id = current_user.id
+      end
       
       if @answer.save
         render json: @answer

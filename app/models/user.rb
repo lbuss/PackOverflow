@@ -13,7 +13,10 @@
 #
 
 class User < ActiveRecord::Base
-  validates :email, :session_token, presence: true
+  validates_presence_of :username, :email, :password_digest
+  validates_uniqueness_of :username, allow_blank: true
+
+  validates :session_token, presence: true
   
   has_many :votes
   has_many :questions
@@ -47,6 +50,19 @@ class User < ActiveRecord::Base
     self.session_token = SecureRandom.urlsafe_base64(16)
     self.save!
     self.session_token
+  end
+
+  def self.new_guest
+    new { |u| u.guest = true
+      u.username = "Guest #{Random.rand(1...90000)}"
+      u.password = "password" }
+  end
+
+  def move_to(user)
+    questions.update_all(user_id: user.id)
+    answers.update_all(user_id: user.id)
+    comments.update_all(user_id: user.id)
+    votes.update_all(user_id: user.id)
   end
 
   protected

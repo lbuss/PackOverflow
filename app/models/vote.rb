@@ -3,6 +3,6 @@ class Vote < ActiveRecord::Base
   
   validates_uniqueness_of :user_id, scope: [:votable_id, :votable_type]
   
-  belongs_to :votable, polymorphic: true, counter_cache: :vote_count
+  belongs_to :votable, polymorphic: true, counter_cache: :vote_count, :dependent => :destroy
   belongs_to :user
 end

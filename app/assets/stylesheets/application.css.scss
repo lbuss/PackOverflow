@@ -20,16 +20,16 @@
 
 
 
-// for fixed top navbar
+
 body {
   padding-top: 60px;
   background-color: #C0C0C0;
   
-//  background-image: image-url('Yosemite.jpg');
-//  background-repeat: no-repeat;
-//  background-attachment: fixed;
-//  background-color: #1A1A1A;
-//  background-position: center;
+/* background-image: image-url('Yosemite.jpg');
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+ background-color: #1A1A1A;
+background-position: center;*/
 }
 
 .text{
@@ -41,9 +41,10 @@ body {
 }
 
 #logo{
-  //height: 60px;
-  //padding-right: 0px;
-  width: 80px;
+  /*height: 60px;*/
+  margin-right: 0px;
+  padding-right: 0px;
+  width: 60px;
   content: image-url('backpack.png');
 }
 
@@ -51,12 +52,11 @@ body {
   padding-left: 0px;
 }
 
-#underHeader {
-  width: 980px;
+.underHeader {
+  display:inline;
 }
 
 #main {
-  width: 980px;
   background:#7f7f7f;
   background:rgba(255,255,255,0.7);
 }
@@ -66,24 +66,13 @@ body {
   border-color: #1A1A1A;
   background-image:none;
 }
-//#formWrapper{
-//  display: block;
-//}
 
 #railsForm {
-/*//  margin-left: auto;
-//  margin-right: auto;*/
-/*  display: inline-block;*/
-  /*position: relative;*/
-/*  top: 50%;
-  left: 40%;*/
-  //transform: translateY(50%);
   text-align: center;
   padding-top: 5px;
   padding-left: 20px;
   padding-right: 20px;
   padding-bottom: 20px;
-  background:#7f7f7f;
   background:rgba(255,255,255,0.7);
 }
 
@@ -208,6 +197,10 @@ hr {
 }
 
 .info{
+  width: 200px;
+  position: absolute;
+  top:4%;
+  right:4%;
   padding: 5px;
   text-align: center;
   border-style: solid;

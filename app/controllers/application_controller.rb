@@ -3,7 +3,7 @@ class ApplicationController < ActionController::Base
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :exception
   
-  helper_method :current_user, :signed_in?, :require_signed_in
+  helper_method :current_user, :signed_in?
   
   def current_user
     return nil unless session[:token]
@@ -22,5 +22,15 @@ class ApplicationController < ActionController::Base
   def sign_out!
     current_user.try(:reset_token)
     session[:token] = nil
+  end
+
+  def create_guest_if_needed
+
+    return if signed_in? # already logged in, don't need to create another one
+
+    user = User.new_guest
+    if user.save
+      sign_in!(user)
+    end
   end
 end

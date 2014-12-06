@@ -18,10 +18,12 @@ PackOverflow.Views.CommentForm = Backbone.View.extend({
     params.comment.commentable_id = this.model.id;
     
     var newComment = new PackOverflow.Models.Comment(params["comment"]);
+
     var that = this;
     newComment.save({}, {
       success: function() {
         $form[0].reset();
+        newComment.username = window.currentUser.username || "Guest";
         that.model.comments().add(newComment);
       }
     })
