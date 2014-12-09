@@ -1,34 +1,38 @@
 <div class="row">
-  <div class="col-xs-12">
-    <h3><%= user.get('username') %></h3>
+  <div class="col-md-12">
+    <h3 class="displayName"><%= user.get('username') %></h3>
     <hr>
   </div>
 </div>
 
-</div class="row">
-  <div class="col-xs-6">
+<div class="row">
+
+  <div class="col-lg-6">
     <h4>User Questions</h4>
     <ul class="nav nav-tabs" role="tablist">
-      <li id="topQ"><a class="switchQ menuLink" name="#topQ" href="#/users/<%= user.get('id') %>">Top</a></li>
-      <li id="newQ"><a class="switchQ menuLink" name="#newQ" href="#/users/<%= user.get('id') %>">Newest</a></li>
+      <li id="topQ"><a class="switch Q menuLink" name="#top" href="#/users/<%= user.get('id') %>">Top</a></li>
+      <li id="newQ"><a class="switch Q menuLink" name="#new" href="#/users/<%= user.get('id') %>">Newest</a></li>
     </ul>
+
     <div class="scrollBox">
       <div style="width:800px">
         <br>
         <ul class="questionList"></ul>
       </div>
     </div>
+
   </div>
-  <div class="col-xs-6">
-    
+
+  <div class="col-lg-6">
     <h4>User Answers</h4>
     <ul class="nav nav-tabs" role="tablist">
-      <li id="topA"><a class="switchA menuLink" name="#topA" href="#/users/<%= user.get('id') %>">Top</a></li>
-      <li id="newA"><a class="switchA menuLink" name="#newA" href="#/users/<%= user.get('id') %>">Newest</a></li>
+      <li id="topA"><a class="switch A menuLink" name="#top" href="#/users/<%= user.get('id') %>">Top</a></li>
+      <li id="newA"><a class="switch A menuLink" name="#new" href="#/users/<%= user.get('id') %>">Newest</a></li>
     </ul>
     <div class="scrollBox">
       <br>
       <ul class="answerList"></ul>
     </div>
   </div>
+
 </div>

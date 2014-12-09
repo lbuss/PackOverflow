@@ -2,56 +2,45 @@ PackOverflow.Models.User = Backbone.Model.extend({
   urlRoot: 'api/users',
   
   parse: function(payload) {
+    
     if(payload.answers) {
-      this.topAnswers().set(payload.answers.topAnswers, {parse: true});
-      delete payload.answers.topAnswers;
-      this.newAnswers().set(payload.answers.newAnswers, {parse: true});
-      delete payload.answers.newAnswers;
+      this.answers().set(payload.answers.answers, {parse: true});
+      delete payload.answers.answers;
     }
     if(payload.questions) {
-      this.topQuestions().set(payload.questions.topQuestions, {parse: true});
-      delete payload.questions.topQuestions;
-      this.newQuestions().set(payload.questions.newQuestions, {parse: true});
-      delete payload.questions.newQuestions;
+      payload.questions.forEach(
+        function(question){
+          if(question.num_answers && question.sum_votes){
+            question.sum_votes /= question.num_answers;
+          }
+        }
+      )
+      this.questions().set(payload.questions, {parse: true});
+      delete payload.questions.questions;
+
     }
     return payload;
   },
   
-  topQuestions: function() {
-    if (!this._topQuestions) {
-      this._topQuestions = new PackOverflow.Collections.Questions([], {
+  questions: function() {
+    if (!this._questions) {
+      this._questions = new PackOverflow.Collections.Questions([], {
         user: this
       });
     }
-    return this._topQuestions;
+    return this._questions;
   },
+
   
-  newQuestions: function() {
-    if (!this._newQuestions) {
-      this._newQuestions = new PackOverflow.Collections.Questions([], {
-        user: this
-      });
-    }
-    return this._newQuestions;
-  },
-  
-  topAnswers: function() {
+  answers: function() {
     if (!this._topAnswers) {
-      this._topAnswers = new PackOverflow.Collections.Answers([], {
+      this._answers = new PackOverflow.Collections.Answers([], {
         user: this
       });
     }
-    return this._topAnswers;
+    return this._answers;
   },
   
-  newAnswers: function() {
-    if (!this._newAnswers) {
-      this._newAnswers = new PackOverflow.Collections.Answers([], {
-        user: this
-      });
-    }
-    return this._newAnswers;
-  },
   
   comments: function() {
     if (!this._comments) {

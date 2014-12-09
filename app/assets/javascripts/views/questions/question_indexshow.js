@@ -7,6 +7,7 @@ PackOverflow.Views.QuestionIndexShow = Backbone.View.extend({
   },
   
   render: function() {
+   
     var content = this.template({
       question: this.model,
       username: this.username

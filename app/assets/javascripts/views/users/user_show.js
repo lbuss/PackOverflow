@@ -3,27 +3,23 @@ PackOverflow.Views.UserShow = Backbone.CompositeView.extend({
   template: JST['users/show'],
   
   initialize: function(options) {
-    this.topQuestionCollection = options.topQuestionCollection;
-    this.newQuestionCollection = options.newQuestionCollection;
+    this.questionCollection = options.questionCollection;
     
-    this.topAnswerCollection = options.topAnswerCollection;
-    this.newAnswerCollection = options.newAnswerCollection;
+    this.answerCollection = options.answerCollection;
   
-    this._selectedAnswerCollection = this.topAnswerCollection;
-    this._selectedQuestionCollection = this.topQuestionCollection;
-    this._tabNameQ = '#topQ'
-    this._tabNameA = '#topA'
+    this._tabNameQ = '#top';
+    this._tabNameA = '#top';
     
     this.model = options.model;
     
     this.listenTo(this.model, "sync", this.render);
-    this.listenTo(this.topQuestionCollection, "sync", this.render);
+    this.listenTo(this.questionCollection, "sync sort", this.render);
+    this.listenTo(this.answerCollection, "sync sort", this.render);
   },
   
  
   events:{
-    "click .switchQ": "collectionSwitchQ",
-    "click .switchA": "collectionSwitchA"
+    "click .switch": "collectionSort"
   },
   
   
@@ -31,8 +27,8 @@ PackOverflow.Views.UserShow = Backbone.CompositeView.extend({
     
     var content = this.template({
       user: this.model,
-      questionCollection: this._selectedQuestionCollection,
-      answerCollection: this._selectedAnswerCollection,
+      questionCollection: this.questionCollection,
+      answerCollection: this.answerCollection,
     });
     this.$el.html(content);
     
@@ -40,7 +36,7 @@ PackOverflow.Views.UserShow = Backbone.CompositeView.extend({
     $('li' + this._tabNameA).addClass('active');
     
     var that = this;
-    this._selectedQuestionCollection.each( function(question){
+    this.questionCollection.each( function(question){
       var view = new PackOverflow.Views.QuestionIndexShow({
         model: question,
         username: that.model.get('username')
@@ -48,7 +44,7 @@ PackOverflow.Views.UserShow = Backbone.CompositeView.extend({
       $('.questionList').append($('<li>').html(view.render().$el))
     })
     
-    this._selectedAnswerCollection.each(function(answer) {
+    this.answerCollection.each(function(answer) {
       var newAnswer = new PackOverflow.Views.AnswerIndexShow({ 
         model: answer,
         username: that.model.get('username')
@@ -59,30 +55,44 @@ PackOverflow.Views.UserShow = Backbone.CompositeView.extend({
     return this;
   },
   
-  collectionSwitchQ: function(event) {
+  collectionSort: function(event) {
     // event listener - call the right 
-    this._tabNameQ = event.currentTarget.name;
-  
+    var targetName = event.currentTarget.name;
+
+    // negative for desc
     var switchHash = {
-      '#topQ':  this.topQuestionCollection,      
-      '#newQ': this.newQuestionCollection,
+      '#top': [-1, 'sum_votes'],      
+      '#new': [-1, 'created_at'],
+      '#unanswered': [1, 'num_answers']
     };
+
+    var multiplier = switchHash[targetName][0];
+    var value = switchHash[targetName][1];
+
+
+    if($(event.currentTarget).hasClass('Q')){
+      this._tabNameQ = targetName;
+      this.questionCollection.comparator = function(model) { 
+        if (typeof model.get(value) === 'string'){
+          var date = Date.parse(model.get(value));
+          return  multiplier * date;
+        }else{
+          return  multiplier * model.get(value);
+        }
+      }
+      this.questionCollection.sort();
+    } else {
+      this._tabNameA = targetName;
+      this.answerCollection.comparator = function(model) { 
+        if (typeof model.get(value) === 'string'){
+          var date = Date.parse(model.get(value));
+          return  multiplier * date;
+        }else{
+          return  multiplier * model.get(value);
+        }
+      }
+      this.answerCollection.sort();
+    }
   
-    this._selectedQuestionCollection = switchHash[this._tabNameQ];
-    this.render();
-  },
-  
-  collectionSwitchA: function(event) {
-    // event listener - call the right 
-    this._tabNameA = event.currentTarget.name;
-  
-    var switchHash = {
-      '#topA':  this.topAnswerCollection,      
-      '#newA': this.newAnswerCollection,
-    };
-  
-    this._selectedAnswerCollection = switchHash[this._tabNameA];
-    this.render();
   }
-  
 });

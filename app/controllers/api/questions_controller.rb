@@ -19,31 +19,21 @@ module Api
     end
 
     def index
-      #should return top questions or whatever eventually, might be easier with SQL, maybe more efficient to sort the collections
-      @topQuestions = Question.select("questions.*, COALESCE(SUM(votes.value), 0) AS sum_votes, COUNT(DISTINCT answers.id) AS num_answers")
-            .joins("LEFT OUTER JOIN votes ON (votes.votable_id = questions.id AND votes.votable_type = 'Question')")
+
+      # KNOWN BUG: TWO OUTER JOINS DO A CARTESIAN MULTIPLICATION OF SUM_VOTES BY NUM_ANSWERS. Currently ducttaped in backbone router.
+
+      @questions = Question.select("questions.*, COUNT(DISTINCT answers.id) AS num_answers, COALESCE(SUM(votes.value), 0) AS sum_votes")
+            .joins("LEFT OUTER JOIN answers ON question_id = questions.id")
+            .joins("LEFT OUTER JOIN votes ON votes.votable_id = questions.id AND votes.votable_type = 'Question'")
             .includes(:user)
-            .joins("LEFT OUTER JOIN answers ON (question_id = questions.id)")
-            .group("questions.id")
-            .order("sum_votes desc");
-      @newQuestions = Question.select("questions.*, SUM(votes.value) AS sum_votes, COUNT(DISTINCT answers.id) AS num_answers")
-            .joins("LEFT OUTER JOIN votes ON (votes.votable_id = questions.id AND votes.votable_type = 'Question')")
-            .joins("LEFT OUTER JOIN answers ON (question_id = questions.id)")
-            .includes(:user)
-            .group("questions.id")
-            .order("created_at desc");
-      @unansweredQuestions = Question.select("questions.*, SUM(votes.value) AS sum_votes, COUNT(DISTINCT answers.id) AS num_answers")
-            .joins("LEFT OUTER JOIN votes ON (votes.votable_id = questions.id AND votes.votable_type = 'Question')")
-            .includes(:user)
-            .joins("LEFT OUTER JOIN answers ON (question_id = questions.id)")
-            .group("questions.id")
-            .order("num_answers asc");
+            .group("questions.id, votes.votable_id")
+            .order("sum_votes desc NULLS LAST");
       render :index
+      # render json: @topQuestions[0]
     end
 
     def show
-      # @question = Question.select("questions.*, SUM(votes.value) AS sum_votes")
-  #           .joins(:votes).group("questions.id").find(params[:id]);
+
       @question = Question.select("questions.*, SUM(votes.value) AS sum_votes")
             .joins("LEFT OUTER JOIN votes ON (votes.votable_id = questions.id AND votes.votable_type = 'Question')")
             .includes(:user)

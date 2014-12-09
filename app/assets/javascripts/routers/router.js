@@ -12,15 +12,12 @@ PackOverflow.Routers.Router = Backbone.Router.extend({
   },
   
   questionIndex: function() {
-    PackOverflow.Collections.topQuestions = new PackOverflow.Collections.Questions;
-    PackOverflow.Collections.newQuestions = new PackOverflow.Collections.Questions;
-    PackOverflow.Collections.unansweredQuestions = new PackOverflow.Collections.Questions;
+    PackOverflow.Collections.questions = new PackOverflow.Collections.Questions;
+
     this.loadQuestions();
     
     var view = new PackOverflow.Views.QuestionsIndex({
-      topCollection: PackOverflow.Collections.topQuestions,
-      newCollection: PackOverflow.Collections.newQuestions,
-      unansweredCollection: PackOverflow.Collections.unansweredQuestions
+      collection: PackOverflow.Collections.questions,
     });
     
     this._swapView(view);
@@ -47,12 +44,15 @@ PackOverflow.Routers.Router = Backbone.Router.extend({
   showUser: function(id) {
     var user = new PackOverflow.Models.User({id: id});
     user.fetch();
+    user.questions().forEach(function(question){
+        if(question.num_answers && question.sum_votes){
+          question.sum_votes /= question.num_answers;
+        }
+    });
     var view = new PackOverflow.Views.UserShow({
       model: user,
-      topQuestionCollection: user.topQuestions(),
-      newQuestionCollection: user.newQuestions(),
-      topAnswerCollection: user.topAnswers(),
-      newAnswerCollection: user.newAnswers(),
+      questionCollection: user.questions(),
+      answerCollection: user.answers(),
     });
     this._swapView(view);
   },
@@ -61,10 +61,13 @@ PackOverflow.Routers.Router = Backbone.Router.extend({
     $.ajax({url:'/api/questions',
     dataType: 'json',
     success: function(data){
-      PackOverflow.Collections.topQuestions.set(data.topQuestions);
-      PackOverflow.Collections.newQuestions.set(data.newQuestions);
-      PackOverflow.Collections.unansweredQuestions.set(data.unansweredQuestions);
-      PackOverflow.Collections.topQuestions.trigger('sync');
+      data.questions.forEach(function(question){
+        if(question.num_answers && question.sum_votes){
+          question.sum_votes /= question.num_answers;
+        }
+      });
+      PackOverflow.Collections.questions.set(data.questions);
+      PackOverflow.Collections.questions.trigger('sync');
     }
   })
   },

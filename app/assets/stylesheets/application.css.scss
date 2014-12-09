@@ -34,17 +34,22 @@ background-position: center;*/
 
 .text{
   background-color: #FFFFFF;
-  display: inline-block;
+  /*display: inline;*/
+  word-wrap: break-word;
   padding: 10px;
   margin-right: 0px;
   margin-right: 10px;
 }
 
+.displayName {
+  margin-left: 10px;
+}
+
 #logo{
   /*height: 60px;*/
-  margin-right: 0px;
   padding-right: 0px;
   width: 60px;
+  height: 76px;
   content: image-url('backpack.png');
 }
 
@@ -57,6 +62,7 @@ background-position: center;*/
 }
 
 #main {
+  padding: 5px;
   background:#7f7f7f;
   background:rgba(255,255,255,0.7);
 }
@@ -144,6 +150,7 @@ a:hover, a:focus{
 }
 .voteBox{
   display: inline-block;
+ 
 }
   
 ul{

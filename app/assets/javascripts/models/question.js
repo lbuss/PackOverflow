@@ -17,17 +17,6 @@ PackOverflow.Models.Question = Backbone.Model.extend({
       this.votes().set(payload.votes, {parse: true});
       delete payload.votes;
     }
-    //
-    // if(payload.vote_count){
-    //   this.voteCount();
-    //   // .set()(payload.vote_count, {parse: true});
-    //   delete payload.votes;
-    // }
-    //
-    // if(payload.username){
-//       this.author(payload.username);
-//       delete payload.username;
-//     }
 
     return payload;
   },
