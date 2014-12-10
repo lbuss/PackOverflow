@@ -37,8 +37,11 @@ background-position: center;*/
   /*display: inline;*/
   word-wrap: break-word;
   padding: 10px;
-  margin-right: 0px;
   margin-right: 10px;
+}
+
+.text.questionText{
+  margin-left: 0px;
 }
 
 .displayName {
@@ -108,7 +111,7 @@ a:hover, a:focus{
 }
 .voteNumbers{
  text-align: center;
- font-size: 24px; 
+ font-size: 24px;
 }
 
 .voteText{
@@ -151,6 +154,10 @@ a:hover, a:focus{
 }
 .voteBox{
   /*width: 50px;*/
+}
+
+.inline{
+  display: inline-block;
 }
   
 ul{
