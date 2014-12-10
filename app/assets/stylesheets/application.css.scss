@@ -98,14 +98,13 @@ a:hover, a:focus{
 }
 
 .vote {
-  margin-left: 6px;
-  display: block;
+  margin-left: -5px;
+  display: inline-block;
   background: image-url('arrowSprite.png');
   overflow: hidden;
   width: 40px;
   height: 25px;
-  cursor: pointer;
-  
+  cursor: pointer;  
 }
 .voteNumbers{
  text-align: center;
@@ -151,8 +150,7 @@ a:hover, a:focus{
   border-color: #A0A0A0;
 }
 .voteBox{
-  display: inline-block;
- 
+  width: 50px;
 }
   
 ul{
