@@ -4,7 +4,6 @@ PackOverflow.Views.UserShow = Backbone.CompositeView.extend({
   
   initialize: function(options) {
     this.questionCollection = options.questionCollection;
-    
     this.answerCollection = options.answerCollection;
   
     this._tabNameQ = '#top';

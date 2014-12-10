@@ -1,13 +1,14 @@
 <div class="row">
+
   <div class="col-xs-2 noPad">
-    <div class="row voteNumbers voteDisplay">
-      <div class="col-xs-12 noPad">
-        <%= answer.escape('sum_votes') || 0 %>
-      </div>
-    </div>
-    <div class="row voteText voteDisplay">
-      <div class="col-xs-12 noPad">
-        votes
+    <div class="row voteDisplay">
+      <div class="col-xs-12">
+        <div class="voteNumbers">
+          <%= answer.escape('sum_votes') || 0 %>
+        </div>
+        <div class="voteText">
+          votes
+        </div>
       </div>
     </div>
   </div>

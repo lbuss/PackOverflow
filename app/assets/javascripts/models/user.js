@@ -2,10 +2,9 @@ PackOverflow.Models.User = Backbone.Model.extend({
   urlRoot: 'api/users',
   
   parse: function(payload) {
-    
     if(payload.answers) {
-      this.answers().set(payload.answers.answers, {parse: true});
-      delete payload.answers.answers;
+      this.answers().set(payload.answers, {parse: true});
+      delete payload.answers;
     }
     if(payload.questions) {
       payload.questions.forEach(
@@ -16,7 +15,7 @@ PackOverflow.Models.User = Backbone.Model.extend({
         }
       )
       this.questions().set(payload.questions, {parse: true});
-      delete payload.questions.questions;
+      delete payload.questions;
 
     }
     return payload;
@@ -33,7 +32,7 @@ PackOverflow.Models.User = Backbone.Model.extend({
 
   
   answers: function() {
-    if (!this._topAnswers) {
+    if (!this._answers) {
       this._answers = new PackOverflow.Collections.Answers([], {
         user: this
       });
