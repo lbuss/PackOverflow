@@ -43,6 +43,11 @@ gem 'newrelic_rpm'
 # Use debugger
 gem 'byebug', group: [:development, :test]
 
+group :production do
+  gem 'unicorn' # make sure you follow installation instructions for this gem
+  gem 'rails_12factor'
+end
+
 group :development do
   gem 'binding_of_caller'
   gem 'better_errors'

@@ -34,7 +34,6 @@ background-position: center;*/
 
 .text{
   background-color: #FFFFFF;
-  /*display: inline;*/
   word-wrap: break-word;
   padding: 10px;
   margin-right: 10px;
@@ -49,7 +48,6 @@ background-position: center;*/
 }
 
 #logo{
-  /*height: 60px;*/
   display: inline;
   padding-right: 0px;
   width: 60px;
@@ -109,6 +107,7 @@ a:hover, a:focus{
   height: 25px;
   cursor: pointer;  
 }
+
 .voteNumbers{
  text-align: center;
  font-size: 24px;
