@@ -3,8 +3,7 @@ User.create!([
   {username: "Tr3kker", email: "trek@tmail.com", password_digest: "$2a$10$29aHfu2C3EaF2qGEUjNo8uCVl5zrgJK/nIfqvreMnVNf7vM3b8Vsq", session_token: "yhTEgMAhe9cDjrUPf4baew", gravatar_url: nil, guest: nil},
   {username: "SuperFoot", email: "SFoot@footmail.com", password_digest: "$2a$10$IrMWyAzQ522KePhHKL.BFeCYZSABkXjBtUVhLBiRu.veuFBAnsehm", session_token: "E_4yIC6xrJYcd00MPZZV0g", gravatar_url: nil, guest: nil},
   {username: "Hiker58", email: "hikeboy@hikemail.com", password_digest: "$2a$10$s5Qj9lCQ6J4ZQVIyTmP0AuFo5Z1cWvxoJ.mZdlWYaDo72UIH7mDB2", session_token: "zW7sQaair6_4gBPlZBB62A", gravatar_url: nil, guest: nil},
-  {username: "sm4sh", email: "smush@tmail.com", password_digest: "$2a$10$Y2C23T6gPeSap2gxI9Yg..8UXmR7S3MavC4DsDU54.cQzoYSTOikK", session_token: "xxRd3wKibhd2jsimK8mmVA", gravatar_url: nil, guest: nil},
-  {username: "Guest 96235", email: "email@email.com", password_digest: "$2a$10$aIvTsHXmGsja.u7Ir03eMO8SOUc.bHixcxL.SIzmJM.92jBmyB1S6", session_token: "G3VT3yOsWfebGnAW-SYU4w", gravatar_url: nil, guest: true}
+  {username: "sm4sh", email: "smush@tmail.com", password_digest: "$2a$10$Y2C23T6gPeSap2gxI9Yg..8UXmR7S3MavC4DsDU54.cQzoYSTOikK", session_token: "xxRd3wKibhd2jsimK8mmVA", gravatar_url: nil, guest: nil}
 ])
 Question.create!([
   {title: "Hiking Shoes for Unevenly Sized Feet?", body: "So, I have one foot that is much larger than the other. I love the outdoors, but hiking for too long gets very uncomfortable. I guess I am looking for any suggestions anyone may have.", votes: nil, answer_id: nil, user_id: 3, vote_count: nil},
