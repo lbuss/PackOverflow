@@ -34,8 +34,6 @@ class ApplicationController < ActionController::Base
 
     puts user.username
 
-    if user.save
-      sign_in!(user)
-    end
+    sign_in!(user)
   end
 end

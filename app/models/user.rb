@@ -17,16 +17,16 @@ class User < ActiveRecord::Base
   validates_uniqueness_of :username, allow_blank: true
 
   validates :session_token, presence: true
-  
+
   has_many :votes
   has_many :questions
   has_many :answers
   has_many :comments
-  
+
   attr_reader :password
   before_validation :ensure_session_token
-  
-  
+
+
 
   # def gravatar_url
  #    "http://www.gravatar.com/avatar/#{ Digest::MD5.hexdigest(email) }"
@@ -57,6 +57,10 @@ class User < ActiveRecord::Base
       u.username = "Guest #{Random.rand(99999)}"
       u.password = "password"
       u.email = "email@email.com" }
+
+    u.save!(:validate => false)
+    session[:guest_user_id] = u.id
+    u
   end
 
   def move_to(user)

@@ -43,8 +43,11 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin]
 # Use debugger
 gem 'byebug', group: [:development, :test]
 
+platforms :ruby do # linux
+  gem 'unicorn'
+end
+
 group :production do
-  gem 'unicorn' # make sure you follow installation instructions for this gem
   gem 'rails_12factor'
 end
 
