@@ -53,14 +53,15 @@ class User < ActiveRecord::Base
   end
 
   def self.new_guest
-    new { |u| u.guest = true
-      u.username = "Guest #{Random.rand(99999)}"
-      u.password = "password"
-      u.email = "email@email.com" }
+    # ActiveRecord::Base.connection_pool.with_connection do
+      u = new { |u| u.guest = true
+        u.username = "Guest #{Random.rand(99999)}"
+        u.password = "password"
+        u.email = "email@email.com" }
 
-    u.save!(:validate => false)
-    session[:guest_user_id] = u.id
-    u
+      u.save!(:validate => false)
+
+      u
   end
 
   def move_to(user)
