@@ -39,11 +39,12 @@ gem 'bcrypt', '~> 3.1.7'
 
 gem 'newrelic_rpm'
 
-
+gem 'tzinfo-data', platforms: [:mingw, :mswin]
 # Use debugger
 gem 'byebug', group: [:development, :test]
 
 group :development do
+  gem 'seed_dump'
   gem 'binding_of_caller'
   gem 'better_errors'
   gem 'annotate'
