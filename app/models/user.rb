@@ -58,9 +58,7 @@ class User < ActiveRecord::Base
         u.username = "Guest #{Random.rand(99999)}"
         u.password = "password"
         u.email = "email@email.com" }
-
       u.save!(:validate => false)
-
       u
   end
 
