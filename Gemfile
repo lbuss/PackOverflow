@@ -43,6 +43,11 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin]
 # Use debugger
 gem 'byebug', group: [:development, :test]
 
+group :production do
+  gem 'unicorn' # make sure you follow installation instructions for this gem
+  gem 'rails_12factor'
+end
+
 group :development do
   gem 'seed_dump'
   gem 'binding_of_caller'
