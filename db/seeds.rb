@@ -13,12 +13,12 @@ Question.create!([
   {title: "What is the Best Season for Wildflowers?", body: "My friend said winter, but I'm not sure he was right. Does anyone have an idea?<div><br></div><div>Thanks,</div><div><br></div><div>-Hiker58</div>", answer_id: nil, user_id: 4, vote_count: 2}
 ])
 Answer.create!([
-  {body: "You can scrape it on rocks, i usually buy rocks from my local quarry for less than 10$ a pound.", votes: nil, question_id: 2, user_id: 4, vote_count: nil},
-  {body: "40L for a weekend trip, scale up from there.", votes: nil, question_id: 1, user_id: 5, vote_count: nil},
-  {body: "Spring is the best for flowers, winter is the best for dead things.", votes: nil, question_id: 4, user_id: 5, vote_count: nil}
+  {body: "You can scrape it on rocks, i usually buy rocks from my local quarry for less than 10$ a pound.", question_id: 2, user_id: 4, vote_count: nil},
+  {body: "40L for a weekend trip, scale up from there.", question_id: 1, user_id: 5, vote_count: nil},
+  {body: "Spring is the best for flowers, winter is the best for dead things.", question_id: 4, user_id: 5, vote_count: nil}
 ])
 Comment.create!([
-  {body: "20L does it for me.", votes: nil, commentable_id: 1, commentable_type: "Question", user_id: 3, vote_count: nil}
+  {body: "20L does it for me.", commentable_id: 1, commentable_type: "Question", user_id: 3, vote_count: nil}
 ])
 Vote.create!([
   {value: 1, votable_id: 1, votable_type: "Question", user_id: 3},
