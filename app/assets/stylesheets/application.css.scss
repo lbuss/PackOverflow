@@ -17,14 +17,15 @@
 
 @import "bootstrap";
 @import "navbar";
-
+@import "bootstrap-glyphicons";
+@import "bootstrap_and_overrides";
 
 
 
 body {
   padding-top: 60px;
   background-color: #C0C0C0;
-  
+
 /* background-image: image-url('Yosemite.jpg');
   background-repeat: no-repeat;
   background-attachment: fixed;
@@ -105,7 +106,7 @@ a:hover, a:focus{
   overflow: hidden;
   width: 40px;
   height: 25px;
-  cursor: pointer;  
+  cursor: pointer;
 }
 
 .voteNumbers{
@@ -158,7 +159,7 @@ a:hover, a:focus{
 .inline{
   display: inline-block;
 }
-  
+
 ul{
   padding-left: 0px;
  // margin-left: 0;
@@ -220,4 +221,8 @@ hr {
   border-width: 1px;
   border-color: #CCCC99;
   background-color: #FFFFCC;
+}
+
+.glyphicon {
+   font-family:'Glyphicons Halflings' !important;
 }
